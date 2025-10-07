@@ -1,55 +1,201 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { ExternalLink, Github } from "lucide-react";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Project {
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  githubUrl: string;
-  liveUrl: string;
-}
-
-const projects: Project[] = [
-  {
-    title: "E-Commerce Platform",
-    description:
-      "A full-stack e-commerce solution built with Next.js, featuring user authentication, payment processing, and admin dashboard.",
-    image: "/api/placeholder/600/400",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
-    githubUrl: "#",
-    liveUrl: "#",
-  },
-  {
-    title: "Task Management App",
-    description:
-      "A collaborative task management application with real-time updates and drag-and-drop functionality.",
-    image: "/api/placeholder/600/400",
-    technologies: ["React", "Node.js", "Socket.io", "MongoDB"],
-    githubUrl: "#",
-    liveUrl: "#",
-  },
-  {
-    title: "Portfolio Website",
-    description:
-      "A responsive portfolio website showcasing projects and skills with smooth animations and modern design.",
-    image: "/api/placeholder/600/400",
-    technologies: ["Next.js", "GSAP", "Tailwind CSS"],
-    githubUrl: "#",
-    liveUrl: "#",
-  },
-];
+const workContent = {
+  projects: [
+    {
+      number: "01",
+      title: "Project One",
+      description: "First amazing project description",
+      buttonText: "View Details",
+      image: { alt: "Project 1" },
+    },
+    {
+      number: "02",
+      title: "Project Two",
+      description: "Second amazing project description",
+      buttonText: "View Details",
+      image: { alt: "Project 2" },
+    },
+    {
+      number: "03",
+      title: "Project Three",
+      description: "Third amazing project description",
+      buttonText: "View Details",
+      image: { alt: "Project 3" },
+    },
+    {
+      number: "04",
+      title: "Project Four",
+      description: "Fourth amazing project description",
+      buttonText: "View Details",
+      image: { alt: "Project 4" },
+    },
+  ],
+};
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement[]>([]);
+  const [isClient, setIsClient] = useState(false);
+  const starRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!isClient) return;
+
+    const initGSAP = async () => {
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const ctx = gsap.context(() => {
+        // Set initial states for all images except the first one
+        gsap.set(["#image-2", "#image-3", "#image-4"], {
+          clipPath: "inset(100% 0 0 0)",
+        });
+
+        // Main timeline for pinning
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: "#work-container",
+            start: "top top",
+            end: "+=300%",
+            pin: true,
+            scrub: 1,
+          },
+        });
+
+        // Pin the image container for the full duration
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: "#work-section",
+            start: "top top",
+            end: "+=300%",
+            pin: "#work-image",
+            pinSpacing: false,
+            scrub: 1,
+          },
+        });
+
+        // Color transitions
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: "#work-content",
+              start: "20% center",
+              end: "30% center",
+              scrub: 1,
+            },
+          })
+          .to("#work-content", {
+            backgroundColor: "#6f533b",
+            duration: 1,
+          });
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: "#work-content",
+              start: "45% center",
+              end: "55% center",
+              scrub: 1,
+            },
+          })
+          .to("#work-content", {
+            backgroundColor: "#9c757a",
+            duration: 1,
+          });
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: "#work-content",
+              start: "70% center",
+              end: "80% center",
+              scrub: 1,
+            },
+          })
+          .to("#work-content", {
+            backgroundColor: "#352b27",
+            duration: 1,
+          });
+
+        // Image transitions
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: "#work-content",
+              start: "20% center",
+              end: "30% center",
+              scrub: 1,
+            },
+          })
+          .to("#image-2", {
+            clipPath: "inset(0% 0 0 0)",
+            duration: 1,
+            ease: "none",
+          });
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: "#work-content",
+              start: "45% center",
+              end: "55% center",
+              scrub: 1,
+            },
+          })
+          .to("#image-3", {
+            clipPath: "inset(0% 0 0 0)",
+            duration: 1,
+            ease: "none",
+          });
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: "#work-content",
+              start: "70% center",
+              end: "80% center",
+              scrub: 1,
+            },
+          })
+          .to("#image-4", {
+            clipPath: "inset(0% 0 0 0)",
+            duration: 1,
+            ease: "none",
+          });
+
+        // Continuous star rotation
+        starRefs.current.forEach((star) => {
+          if (star) {
+            gsap.to(star, {
+              rotation: 360,
+              duration: 3,
+              repeat: -1,
+              ease: "linear",
+            });
+          }
+        });
+      });
+
+      return () => ctx.revert();
+    };
+
+    initGSAP();
+  }, [isClient]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -96,35 +242,9 @@ export default function Projects() {
     return () => ctx.revert();
   }, []);
 
-  const addToRefs = (el: HTMLDivElement | null) => {
-    if (el && !projectsRef.current.includes(el)) {
-      projectsRef.current.push(el);
-    }
-  };
-
-  const handleProjectHover = (e: React.MouseEvent<HTMLDivElement>) => {
-    gsap.to(e.currentTarget, {
-      y: -5,
-      duration: 0.3,
-      ease: "power2.out",
-      boxShadow:
-        "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-    });
-  };
-
-  const handleProjectLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    gsap.to(e.currentTarget, {
-      y: 0,
-      duration: 0.3,
-      ease: "power2.out",
-      boxShadow:
-        "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-    });
-  };
-
   return (
-    <section ref={sectionRef} id="projects" className="py-20 bg-neutral-800">
-      <div className="container mx-auto px-4">
+    <section ref={sectionRef} id="projects" className="pt-20 bg-[#234466]">
+      <div className="">
         <div ref={headerRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Featured Projects
@@ -135,52 +255,114 @@ export default function Projects() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
+        {/* Work Section with Scroll Animation */}
+        <div
+          id="work-section"
+          className="relative h-[400vh] mt-16 overflow-hidden"
+        >
+          {/* Fixed background container */}
+          <div className="absolute top-0 left-0 right-0 h-screen z-0">
             <div
-              key={project.title}
-              ref={addToRefs}
-              className="bg-stone-900/50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow border border-stone-700/50"
-              onMouseEnter={handleProjectHover}
-              onMouseLeave={handleProjectLeave}
-            >
-              <div className="h-48 bg-stone-800 flex items-center justify-center">
-                <span className="text-stone-400">Project Image</span>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-stone-300 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-stone-800/70 text-stone-300 text-sm rounded-full border border-stone-700/50"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex gap-4">
-                  <a
-                    href={project.githubUrl}
-                    className="flex items-center gap-2 text-stone-300 hover:text-white transition-colors"
-                  >
-                    <Github size={20} />
-                    Code
-                  </a>
-                  <a
-                    href={project.liveUrl}
-                    className="flex items-center gap-2 text-stone-300 hover:text-white transition-colors"
-                  >
-                    <ExternalLink size={20} />
-                    Live Demo
-                  </a>
-                </div>
-              </div>
+              id="work-container"
+              style={{ backgroundColor: "#234466" }}
+              className="h-screen transition-colors duration-500"
+            />
+          </div>
+          <div
+            id="work-image"
+            className="absolute top-0 w-full sm:w-[50%] h-screen right-0 z-[20] flex justify-center items-center"
+          >
+            <div className="aspect-[6/7] w-[300px] sm:w-[350px] md:w-[450px] h-[350px] sm:h-[408px] md:h-[525px] overflow-hidden rounded-[40px] shadow-xl relative mx-auto sm:mr-[5%] md:mr-[20%]">
+              <Image
+                src="/frame1.png"
+                alt={workContent.projects[0].image.alt}
+                width={450}
+                height={562}
+                className="object-cover w-full h-full absolute top-0 left-0"
+                id="image-1"
+                priority
+              />
+              <Image
+                src="/frame2.png"
+                alt={workContent.projects[1].image.alt}
+                width={450}
+                height={562}
+                className="object-cover w-full h-full absolute top-0 left-0"
+                id="image-2"
+                priority
+              />
+              <Image
+                src="/frame3.png"
+                alt={workContent.projects[2].image.alt}
+                width={450}
+                height={562}
+                className="object-cover w-full h-full absolute top-0 left-0"
+                id="image-3"
+                priority
+              />
+              <Image
+                src="/frame4.png"
+                alt={workContent.projects[3].image.alt}
+                width={450}
+                height={562}
+                className="object-cover w-full h-full absolute top-0 left-0"
+                id="image-4"
+                priority
+              />
             </div>
-          ))}
+          </div>
+
+          {/* Scrolling content */}
+          <div
+            id="work-content"
+            className="absolute top-0 left-0 right-0 h-[400vh]"
+          ></div>
+          <div
+            id="work-content-old"
+            className="absolute flex flex-col justify-center items-center sm:block top-0 left-0 sm:pl-10 right-0 h-[400vh] z-20 bg-black/40 sm:bg-transparent"
+          >
+            {workContent.projects.map((project, index) => (
+              <div
+                key={index}
+                className="flex items-center h-screen w-full sm:w-[50%] justify-center z-100"
+              >
+                <div className="flex flex-col gap-4 items-start max-w-md">
+                  <div className="flex gap-2 items-center justify-center">
+                    <div
+                      ref={(el) => {
+                        if (el && !starRefs.current.includes(el)) {
+                          starRefs.current[index] = el;
+                        }
+                      }}
+                      className="relative w-6 h-6"
+                    >
+                      <Image
+                        src="/svgs/star.svg"
+                        alt="Star"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <p className="text-white text-md">
+                      {project.number} Project
+                    </p>
+                  </div>
+                  <h2 className="md:text-5xl text-3xl font-bold text-white">
+                    {project.title}
+                  </h2>
+                  <p className="text-white/80 text-lg lg:text-xl">
+                    {project.description}
+                  </p>
+                  <a
+                    href="#"
+                    className="px-6 py-3 border border-white text-white rounded-lg hover:bg-white hover:text-black transition-colors"
+                  >
+                    {project.buttonText || "View"}
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

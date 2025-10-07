@@ -5,6 +5,7 @@ import { Code, Palette, Smartphone } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ArrowDown from "./ArrowDown";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,19 +16,32 @@ export default function About() {
   const skillsContainerRef = useRef<HTMLDivElement>(null);
   const descriptionRefs = useRef<HTMLDivElement[]>([]);
   const iconRefs = useRef<HTMLDivElement[]>([]);
+  const techIconRefs = useRef<HTMLDivElement[]>([]);
 
   const skills = [
     {
       icon: Code,
       title: "Frontend Development",
       description: "React, Next.js, TypeScript",
+      techIcons: [
+        { src: "/svgs/typescript.svg", name: "TypeScript" },
+        { src: "/svgs/react.svg", name: "React" },
+        { src: "/svgs/nextjs.svg", name: "Next.js" },
+        { src: "/svgs/redux.svg", name: "Redux" },
+      ],
       detailedDescription:
         "Building modern, performant web applications using React and Next.js. Expert in TypeScript for type-safe code, state management with Redux, and creating reusable component libraries. Focused on clean code architecture and best practices.",
     },
     {
       icon: Palette,
-      title: "UI/UX Design",
-      description: "Tailwind CSS, GSAP",
+      title: "UI & Styles",
+      description: "CSS,Tailwind, Radix-ui, MUI, GSAP",
+      techIcons: [
+        { src: "/svgs/css.svg", name: "CSS" },
+        { src: "/svgs/tailwind.svg", name: "Tailwind CSS" },
+        { src: "/svgs/radixui.svg", name: "Radix-ui" },
+        { src: "/svgs/materialui.svg", name: "Material-ui" },
+      ],
       detailedDescription:
         "Crafting beautiful, intuitive user interfaces with Tailwind CSS. Creating smooth, engaging animations with GSAP and Framer Motion. Strong understanding of design principles, color theory, and user experience optimization.",
     },
@@ -35,6 +49,11 @@ export default function About() {
       icon: Smartphone,
       title: "Responsive Design",
       description: "Mobile-first approach",
+      techIcons: [
+        { src: "/svgs/mobile.svg", name: "Mobile" },
+        { src: "/svgs/rightarrow.svg", name: "Right" },
+        { src: "/svgs/screen.svg", name: "Screen" },
+      ],
       detailedDescription:
         "Designing and developing responsive applications that work seamlessly across all devices. Mobile-first methodology ensuring optimal performance on smartphones, tablets, and desktops. Focus on accessibility and cross-browser compatibility.",
     },
@@ -85,7 +104,7 @@ export default function About() {
       ScrollTrigger.create({
         trigger: skillsContainerRef.current,
         start: "top top",
-        end: `+=${window.innerHeight * 0.5}`,
+        end: `+=${window.innerHeight * 0.4}`,
         pin: true,
         pinSpacing: true,
       });
@@ -93,6 +112,21 @@ export default function About() {
       // Expand all cards at once when scrolling starts
       descriptionRefs.current.forEach((desc) => {
         gsap.to(desc, {
+          height: "auto",
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: skillsContainerRef.current,
+            start: "top top",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+
+      // Show tech icons when expanding
+      techIconRefs.current.forEach((techIcon) => {
+        gsap.to(techIcon, {
           height: "auto",
           opacity: 1,
           duration: 0.8,
@@ -142,6 +176,12 @@ export default function About() {
     }
   };
 
+  const addToTechIconRefs = (el: HTMLDivElement | null) => {
+    if (el && !techIconRefs.current.includes(el)) {
+      techIconRefs.current.push(el);
+    }
+  };
+
   return (
     <section ref={sectionRef} id="about" className="py-20 relative">
       <div className="container mx-auto px-4">
@@ -170,6 +210,25 @@ export default function About() {
                   {skill.title}
                 </h3>
                 <p className="text-stone-400 mb-4">{skill.description}</p>
+                <div
+                  ref={addToTechIconRefs}
+                  className="h-0 opacity-0 overflow-hidden flex justify-center gap-3 mb-4"
+                >
+                  {skill.techIcons.map((techIcon) => (
+                    <div
+                      key={techIcon.name}
+                      className="relative w-8 h-8 opacity-70 hover:opacity-100 transition-opacity"
+                      title={techIcon.name}
+                    >
+                      <Image
+                        src={techIcon.src}
+                        alt={techIcon.name}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
                 <div
                   ref={addToDescRefs}
                   className="h-0 opacity-0 overflow-hidden"
