@@ -1,17 +1,16 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ChevronDown } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import ArrowDown from "./ArrowDown";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const chevronRef = useRef<HTMLDivElement>(null);
   const shape1Ref = useRef<SVGPathElement>(null);
   const shape2Ref = useRef<SVGPathElement>(null);
   const shape4Ref = useRef<SVGCircleElement>(null);
@@ -42,22 +41,13 @@ export default function Hero() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Initial state
-      gsap.set([contentRef.current, chevronRef.current], { opacity: 0, y: 20 });
+      gsap.set(contentRef.current, { opacity: 0, y: 20 });
 
       // Animate content
       gsap.to(contentRef.current, {
         opacity: 1,
         y: 0,
         duration: 0.8,
-        ease: "power2.out",
-      });
-
-      // Animate chevron with delay
-      gsap.to(chevronRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        delay: 1,
         ease: "power2.out",
       });
 
@@ -267,6 +257,9 @@ export default function Hero() {
               </a>
             </div>
           </div>
+          <div className="absolute bottom-[5%] left-[25%] -translate-x-1/2">
+            <ArrowDown className="w-64 text-stone-300" />
+          </div>
 
           {/* Right: Portrait with animated shape */}
           <div
@@ -377,10 +370,6 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </div>
-
-        <div ref={chevronRef} className="mt-16">
-          <ChevronDown className="w-8 h-8 text-gray-300 mx-auto animate-bounce" />
         </div>
       </div>
     </section>
