@@ -100,7 +100,7 @@ export default function Projects() {
             },
           })
           .to("#work-content", {
-            backgroundColor: "#6f533b",
+            backgroundColor: "#0c2f25",
             duration: 1,
           });
 
@@ -114,7 +114,7 @@ export default function Projects() {
             },
           })
           .to("#work-content", {
-            backgroundColor: "#9c757a",
+            backgroundColor: "#11122f",
             duration: 1,
           });
 
@@ -128,7 +128,7 @@ export default function Projects() {
             },
           })
           .to("#work-content", {
-            backgroundColor: "#352b27",
+            backgroundColor: "#1c1917",
             duration: 1,
           });
 
@@ -243,7 +243,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="projects" className="pt-20 bg-[#234466]">
+    <section ref={sectionRef} id="projects" className="pt-20 bg-[#706B5A]">
       <div className="">
         <div ref={headerRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -264,7 +264,7 @@ export default function Projects() {
           <div className="absolute top-0 left-0 right-0 h-screen z-0">
             <div
               id="work-container"
-              style={{ backgroundColor: "#234466" }}
+              style={{ backgroundColor: "#706B5A" }}
               className="h-screen transition-colors duration-500"
             />
           </div>
@@ -272,39 +272,39 @@ export default function Projects() {
             id="work-image"
             className="absolute top-0 w-full sm:w-[50%] h-screen right-0 z-[20] flex justify-center items-center"
           >
-            <div className="aspect-[6/7] w-[300px] sm:w-[350px] md:w-[450px] h-[350px] sm:h-[408px] md:h-[525px] overflow-hidden rounded-[40px] shadow-xl relative mx-auto sm:mr-[5%] md:mr-[20%]">
+            <div className="aspect-[2573/1699] w-[424px] sm:w-[494px] md:w-[636px] h-[280px] sm:h-[326px] md:h-[420px] overflow-hidden rounded-[48px] shadow-xl relative mx-auto sm:mr-[5%] md:mr-[20%]">
               <Image
-                src="/frame1.png"
+                src="/project1.png"
                 alt={workContent.projects[0].image.alt}
-                width={450}
-                height={562}
+                width={680}
+                height={449}
                 className="object-cover w-full h-full absolute top-0 left-0"
                 id="image-1"
                 priority
               />
               <Image
-                src="/frame2.png"
+                src="/project2.png"
                 alt={workContent.projects[1].image.alt}
-                width={450}
-                height={562}
+                width={680}
+                height={449}
                 className="object-cover w-full h-full absolute top-0 left-0"
                 id="image-2"
                 priority
               />
               <Image
-                src="/frame3.png"
+                src="/project3.png"
                 alt={workContent.projects[2].image.alt}
-                width={450}
-                height={562}
+                width={680}
+                height={449}
                 className="object-cover w-full h-full absolute top-0 left-0"
                 id="image-3"
                 priority
               />
               <Image
-                src="/frame4.png"
+                src="/project4.png"
                 alt={workContent.projects[3].image.alt}
-                width={450}
-                height={562}
+                width={680}
+                height={449}
                 className="object-cover w-full h-full absolute top-0 left-0"
                 id="image-4"
                 priority
