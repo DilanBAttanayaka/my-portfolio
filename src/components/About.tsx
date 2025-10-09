@@ -183,7 +183,7 @@ export default function About() {
   };
 
   return (
-    <section ref={sectionRef} id="about" className="py-20 relative">
+    <section ref={sectionRef} id="about" className="pt-20 relative">
       <div className="container mx-auto px-4">
         <div ref={headerRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -247,6 +247,7 @@ export default function About() {
           </div>
         </div>
       </div>
+      <div className="h-[40px] bg-[#605b4b] rounded-t-3xl"></div>
     </section>
   );
 }

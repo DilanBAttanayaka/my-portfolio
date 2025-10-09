@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import MaskedText from "./MaskedText";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -243,8 +244,8 @@ export default function Projects() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="projects" className="pt-20 bg-[#706B5A]">
-      <div className="">
+    <section ref={sectionRef} id="projects" className="bg-[#605b4b] pt-10">
+      <div className="relative">
         <div ref={headerRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Featured Projects
@@ -258,13 +259,13 @@ export default function Projects() {
         {/* Work Section with Scroll Animation */}
         <div
           id="work-section"
-          className="relative h-[400vh] mt-16 overflow-hidden"
+          className="relative h-[400vh] mt-16 overflow-hidden z-20 rounded-b-3xl"
         >
           {/* Fixed background container */}
           <div className="absolute top-0 left-0 right-0 h-screen z-0">
             <div
               id="work-container"
-              style={{ backgroundColor: "#706B5A" }}
+              style={{ backgroundColor: "#605b4b" }}
               className="h-screen transition-colors duration-500"
             />
           </div>
@@ -363,6 +364,9 @@ export default function Projects() {
               </div>
             ))}
           </div>
+        </div>
+        <div className="absolute left-0 bottom-0 w-full z-10 ">
+          <MaskedText />
         </div>
       </div>
     </section>
