@@ -266,7 +266,7 @@ export default function Hero() {
             ref={shapeContainerRef}
             className="relative flex items-end justify-center h-[66vh] overflow-visible"
           >
-            <div className="relative w-[200%] md:w-[950px] aspect-square translate-y-[30%] -translate-x-[25%] overflow-visible">
+            <div className="relative w-[200%] md:w-[950px] aspect-square translate-y-[23%] -translate-x-[25%] overflow-visible">
               {/* Interactive organic shape background */}
               <svg
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%]"

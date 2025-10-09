@@ -39,7 +39,7 @@ export default function CodeBackground({
       {/* Code background */}
       <div
         ref={bgRef}
-        className="absolute inset-0 w-full h-[360vh] blur-[2px] -z-10"
+        className="absolute inset-0 w-full h-[500vh] blur-[2px] -z-10"
         style={{
           backgroundImage: "url('/code.jpg')",
           backgroundRepeat: "repeat-y",
