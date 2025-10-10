@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 import MaskedText from "./MaskedText";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,14 +13,16 @@ const workContent = {
   projects: [
     {
       number: "01",
-      title: "Project One",
-      description: "First amazing project description",
+      title: "MTI Electronics",
+      slug: "mti-electronics",
+      description: "Complete agency portfolio with CMS integration",
       buttonText: "View Details",
-      image: { alt: "Project 1" },
+      image: { alt: "MTI Electronics" },
     },
     {
       number: "02",
       title: "Project Two",
+      slug: "project-two",
       description: "Second amazing project description",
       buttonText: "View Details",
       image: { alt: "Project 2" },
@@ -27,6 +30,7 @@ const workContent = {
     {
       number: "03",
       title: "Project Three",
+      slug: "project-three",
       description: "Third amazing project description",
       buttonText: "View Details",
       image: { alt: "Project 3" },
@@ -34,6 +38,7 @@ const workContent = {
     {
       number: "04",
       title: "Project Four",
+      slug: "project-four",
       description: "Fourth amazing project description",
       buttonText: "View Details",
       image: { alt: "Project 4" },
@@ -354,12 +359,12 @@ export default function Projects() {
                   <p className="text-white/80 text-lg lg:text-xl">
                     {project.description}
                   </p>
-                  <a
-                    href="#"
+                  <Link
+                    href={`/projects/${project.slug}`}
                     className="px-6 py-3 border border-white text-white rounded-lg hover:bg-white hover:text-black transition-colors"
                   >
                     {project.buttonText || "View"}
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
