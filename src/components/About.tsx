@@ -236,7 +236,7 @@ export default function About() {
               <div
                 key={skill.title}
                 id={`skill-card-${index}`}
-                className="text-center p-6 rounded-lg bg-stone-900/50 hover:bg-stone-900/70 transition-colors border border-stone-700/50 overflow-hidden min-h-[500px]"
+                className="text-center p-6 rounded-lg bg-stone-900/50 hover:bg-stone-900/70 transition-colors border border-stone-700/50 overflow-hidden"
               >
                 <div id={`skill-icon-${index}`} className="my-4">
                   <skill.icon className="w-12 h-12 text-stone-300 mx-auto" />
@@ -280,7 +280,7 @@ export default function About() {
             {/* Experience Card */}
             <div
               id="experience-card"
-              className="absolute top-0 md:left-[calc(33.33%+1rem)] right-0 md:right-0 opacity-0 p-8 min-h-[500px] rounded-lg bg-stone-900/50 hover:bg-stone-900/70 transition-colors border border-stone-600/50"
+              className="absolute top-0 md:left-[calc(33.33%+1rem)] right-0 md:right-0 opacity-0 p-8 min-h-[430px] rounded-lg bg-stone-900/50 hover:bg-stone-900/70 transition-colors border border-stone-600/50"
             >
               <h3 className="text-2xl font-semibold text-white mb-6 flex items-center gap-4">
                 <svg
