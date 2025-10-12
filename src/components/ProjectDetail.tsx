@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
 import TechBadges from "./TechBadges";
 import ArrowDown from "./ArrowDown";
 
@@ -18,8 +18,12 @@ export default function ProjectDetail({ project }: { project: any }) {
     { name: "Tailwind CSS", icon: "/svgs/tailwind.svg" },
     { name: "Redux", icon: "/svgs/redux.svg" },
     { name: "TypeScript", icon: "/svgs/typescript.svg" },
+    { name: "PayHere", icon: "/svgs/payhere.png" },
   ];
   const [activeSection, setActiveSection] = useState(0);
+  const [expandedFeatures, setExpandedFeatures] = useState<Set<number>>(
+    new Set()
+  );
   const scrollToSection = (index: any) => {
     const container = document.getElementById("sections-container");
     if (!container) return;
@@ -34,6 +38,19 @@ export default function ProjectDetail({ project }: { project: any }) {
       top: targetScroll,
       behavior: "smooth",
     });
+  };
+
+  const toggleFeature = (index: number) => {
+    const newExpanded = new Set(expandedFeatures);
+    if (newExpanded.has(index)) {
+      // Collapsing - just remove this one
+      newExpanded.delete(index);
+    } else {
+      // Expanding - collapse all others first, then add this one
+      newExpanded.clear();
+      newExpanded.add(index);
+    }
+    setExpandedFeatures(newExpanded);
   };
 
   useEffect(() => {
@@ -286,17 +303,60 @@ export default function ProjectDetail({ project }: { project: any }) {
                   id="description-content"
                   className="text-stone-300 text-lg leading-relaxed whitespace-pre-line overflow-hidden absolute top-0 left-0 w-full p-6"
                 >
-                  <div className="bg-stone-700/30 p-4 rounded-lg">
+                  <div className="bg-stone-700/30 p-4 rounded-lg flex items-start gap-2 flex-1 min-w-0">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-3 flex-shrink-0"></div>
+
                     {project.description}
                   </div>
                 </div>
 
                 <div
                   id="features-content"
-                  className="text-stone-300 text-lg leading-relaxed whitespace-pre-line overflow-hidden absolute top-0 left-0 w-full p-6"
+                  className="text-stone-300 text-lg leading-relaxed overflow-hidden absolute top-0 left-0 w-full p-6 z-10"
                 >
-                  <div className="bg-stone-700/30 p-4 rounded-lg">
-                    {project.features}
+                  <div className="grid grid-cols-1 gap-3">
+                    {project.features?.map(
+                      (
+                        feature: { title: string; description: string },
+                        index: number
+                      ) => {
+                        const isExpanded = expandedFeatures.has(index);
+                        return (
+                          <div
+                            key={index}
+                            className={`bg-gradient-to-br from-stone-700/40 to-stone-600/20 rounded-xl border border-stone-600/30 hover:border-stone-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-stone-500/10 ${
+                              isExpanded ? "ring-2 ring-blue-400/50" : ""
+                            }`}
+                          >
+                            <button
+                              onClick={() => toggleFeature(index)}
+                              className="w-full p-4 text-left flex items-center justify-between group hover:bg-stone-600/20 transition-colors"
+                            >
+                              <div className="flex items-start gap-2 flex-1 min-w-0">
+                                <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+                                <h4 className="text-lg font-semibold text-white leading-tight group-hover:text-blue-300 transition-colors break-words">
+                                  {feature.title}
+                                </h4>
+                              </div>
+                              <div className="ml-4 flex-shrink-0">
+                                {isExpanded ? (
+                                  <ChevronUp className="w-5 h-5 text-stone-400 group-hover:text-blue-300 transition-colors flex-shrink-0" />
+                                ) : (
+                                  <ChevronDown className="w-5 h-5 text-stone-400 group-hover:text-blue-300 transition-colors flex-shrink-0" />
+                                )}
+                              </div>
+                            </button>
+                            {isExpanded && (
+                              <div className="px-4 pb-4">
+                                <p className="text-stone-300 leading-relaxed ml-4 text-sm animate-in slide-in-from-top-2 duration-300">
+                                  {feature.description}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      }
+                    )}
                   </div>
                 </div>
 
@@ -304,7 +364,9 @@ export default function ProjectDetail({ project }: { project: any }) {
                   id="role-content"
                   className="text-stone-300 text-lg leading-relaxed whitespace-pre-line overflow-hidden absolute top-0 left-0 w-full p-6"
                 >
-                  <div className="bg-stone-700/30 p-4 rounded-lg">
+                  <div className="bg-stone-700/30 p-4 rounded-lg flex items-start gap-2 flex-1 min-w-0">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-3 flex-shrink-0"></div>
+
                     {project.role}
                   </div>
                 </div>

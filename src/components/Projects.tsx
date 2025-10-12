@@ -13,19 +13,20 @@ const workContent = {
   projects: [
     {
       number: "01",
+      title: "Bean Empire",
+      slug: "bean-empire",
+      description:
+        "Full-stack e-commerce platform for premium coffee business in Sri Lanka",
+      buttonText: "View Details",
+      image: { alt: "Bean Empire E-commerce Platform" },
+    },
+    {
+      number: "02",
       title: "MTI Electronics",
       slug: "mti-electronics",
       description: "Complete agency portfolio with CMS integration",
       buttonText: "View Details",
       image: { alt: "MTI Electronics" },
-    },
-    {
-      number: "02",
-      title: "Project Two",
-      slug: "project-two",
-      description: "Second amazing project description",
-      buttonText: "View Details",
-      image: { alt: "Project 2" },
     },
     {
       number: "03",
