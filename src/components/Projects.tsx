@@ -22,27 +22,29 @@ const workContent = {
     },
     {
       number: "02",
-      title: "MTI Electronics",
-      slug: "mti-electronics",
-      description: "Complete agency portfolio with CMS integration",
+      title: "Cafe Finder",
+      slug: "cafe-finder",
+      description:
+        "Modern web application for discovering and reviewing coffee shops",
       buttonText: "View Details",
-      image: { alt: "MTI Electronics" },
+      image: { alt: "Cafe Finder Application" },
     },
     {
       number: "03",
-      title: "Project Three",
-      slug: "project-three",
-      description: "Third amazing project description",
+      title: "AI Content Writer",
+      slug: "ai-content-writer",
+      description:
+        "AI-powered SEO content generation and optimization platform",
       buttonText: "View Details",
-      image: { alt: "Project 3" },
+      image: { alt: "AI Content Writer Platform" },
     },
     {
       number: "04",
-      title: "Project Four",
-      slug: "project-four",
-      description: "Fourth amazing project description",
+      title: "Twost",
+      slug: "twost",
+      description: "Food delivery order management system for restaurants",
       buttonText: "View Details",
-      image: { alt: "Project 4" },
+      image: { alt: "Twost Order Management System" },
     },
   ],
 };
@@ -101,8 +103,8 @@ export default function Projects() {
           .timeline({
             scrollTrigger: {
               trigger: "#work-content",
-              start: "20% center",
-              end: "30% center",
+              start: "18% center",
+              end: "28% center",
               scrub: 1,
             },
           })
@@ -115,8 +117,8 @@ export default function Projects() {
           .timeline({
             scrollTrigger: {
               trigger: "#work-content",
-              start: "45% center",
-              end: "55% center",
+              start: "43% center",
+              end: "53% center",
               scrub: 1,
             },
           })
@@ -129,8 +131,8 @@ export default function Projects() {
           .timeline({
             scrollTrigger: {
               trigger: "#work-content",
-              start: "70% center",
-              end: "80% center",
+              start: "68% center",
+              end: "78% center",
               scrub: 1,
             },
           })
@@ -144,8 +146,8 @@ export default function Projects() {
           .timeline({
             scrollTrigger: {
               trigger: "#work-content",
-              start: "20% center",
-              end: "30% center",
+              start: "18% center",
+              end: "28% center",
               scrub: 1,
             },
           })
@@ -159,8 +161,8 @@ export default function Projects() {
           .timeline({
             scrollTrigger: {
               trigger: "#work-content",
-              start: "45% center",
-              end: "55% center",
+              start: "43% center",
+              end: "53% center",
               scrub: 1,
             },
           })
@@ -174,8 +176,8 @@ export default function Projects() {
           .timeline({
             scrollTrigger: {
               trigger: "#work-content",
-              start: "70% center",
-              end: "80% center",
+              start: "68% center",
+              end: "78% center",
               scrub: 1,
             },
           })
