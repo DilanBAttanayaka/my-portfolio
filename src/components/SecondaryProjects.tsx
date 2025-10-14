@@ -10,31 +10,40 @@ gsap.registerPlugin(ScrollTrigger);
 const secondaryProjects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "Full-stack e-commerce solution with payment integration",
-    image: "/project1.png",
-    tags: ["React", "Node.js", "Stripe"],
+    title: "AI Legal Assistant",
+    description:
+      "AI-powered legal assistant providing intelligent guidance on legal matters and documentation",
+    image: "/ailegal.png",
+    tags: ["Next.js 14", "Typescript", "Tailwind CSS"],
+    hasImage: true,
   },
   {
     id: 2,
-    title: "Analytics Dashboard",
-    description: "Real-time data visualization and reporting tool",
-    image: "/project2.png",
-    tags: ["Next.js", "D3.js", "PostgreSQL"],
+    title: "Portfolio Website",
+    description: "Personal portfolio showcasing projects and skills",
+    image: "/portfolio.png",
+    tags: ["Next.js 15", "TypeScript", "Tailwind CSS", "GSAP"],
+    hasImage: true,
   },
   {
     id: 3,
-    title: "Social Media App",
-    description: "Mobile-first social networking platform",
-    image: "/project3.png",
-    tags: ["React Native", "Firebase", "Redux"],
+    title: "Navinne Hospital Management System",
+    description:
+      "Full staff, Patient, and inventory management including POS for pharmacy",
+    image: "",
+    svg: "/svgs/navinne.png",
+    tags: ["Next.js 13", "TypeScript", "MUI", "Redux"],
+    hasImage: false,
   },
   {
     id: 4,
-    title: "Task Management",
-    description: "Collaborative project management tool",
-    image: "/project4.png",
-    tags: ["TypeScript", "Express", "MongoDB"],
+    title: "Rocell Stock App",
+    description:
+      "Mobile app for inventory stock check (integrated with zebra device scanners) for rocell bathware",
+    image: "",
+    svg: "/svgs/rocell.svg",
+    tags: ["React Native", "TypeScript"],
+    hasImage: false,
   },
 ];
 
@@ -47,7 +56,7 @@ export default function SecondaryProjects() {
 
     const ctx = gsap.context(() => {
       // Animate project cards on scroll
-      projectRefs.current.forEach((project, index) => {
+      projectRefs.current.forEach((project) => {
         if (project) {
           gsap.fromTo(
             project,
@@ -87,33 +96,53 @@ export default function SecondaryProjects() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {secondaryProjects.map((project, index) => (
             <div
               key={project.id}
               ref={(el) => {
                 projectRefs.current[index] = el;
               }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              className={`bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 ${
+                project.hasImage || project.svg ? "overflow-hidden" : "p-6"
+              }`}
             >
-              <div className="relative w-full h-64">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-stone-900 mb-3">
+              {project.hasImage ? (
+                <div className="relative w-full aspect-[16/8] mt-4 shadow-lg">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className=" w-full h-auto"
+                  />
+                </div>
+              ) : project.svg ? (
+                <div className="flex justify-center items-center w-full h-32 bg-stone-200 shadow-lg">
+                  <Image
+                    src={project.svg}
+                    alt={`${project.title} logo`}
+                    width={200}
+                    height={200}
+                    className="opacity-80 h-24 w-24"
+                  />
+                </div>
+              ) : null}
+              <div className={project.hasImage || project.svg ? "p-4" : ""}>
+                <h3
+                  className={`font-bold text-stone-900 mb-2 ${
+                    project.hasImage || project.svg ? "text-xl" : "text-lg"
+                  }`}
+                >
                   {project.title}
                 </h3>
-                <p className="text-stone-600 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
+                <p className="text-stone-600 mb-3 text-sm">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-1">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 bg-stone-200 text-stone-700 rounded-full text-sm"
+                      className="px-2 py-1 bg-stone-200 text-stone-700 rounded-full text-xs"
                     >
                       {tag}
                     </span>
