@@ -68,7 +68,7 @@ export default function About() {
             end: "top 80%",
             toggleActions: "play none none reverse",
           },
-        }
+        },
       );
 
       // Animate skills cards
@@ -88,7 +88,7 @@ export default function About() {
               end: "20% 80%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       });
 
@@ -96,7 +96,7 @@ export default function About() {
       ScrollTrigger.create({
         trigger: "#about",
         start: "22% top",
-        end: `+=${window.innerHeight * 2}`,
+        end: `+=${window.innerHeight}`,
         pin: "#skills-container",
         pinSpacing: true,
       });
@@ -110,8 +110,8 @@ export default function About() {
           ease: "power2.inOut",
           scrollTrigger: {
             trigger: "#about",
-            start: "15% top",
-            end: "15% top",
+            start: "5% top",
+            end: "5% top",
             toggleActions: "play none none reverse",
           },
         });
@@ -126,8 +126,8 @@ export default function About() {
           ease: "power2.inOut",
           scrollTrigger: {
             trigger: "#about",
-            start: "15% top",
-            end: "15% top",
+            start: "10% top",
+            end: "10% top",
             toggleActions: "play none none reverse",
           },
         });
@@ -142,8 +142,8 @@ export default function About() {
           ease: "power2.inOut",
           scrollTrigger: {
             trigger: "#about",
-            start: "15% top",
-            end: "15% top",
+            start: "12% top",
+            end: "12% top",
             toggleActions: "play none none reverse",
           },
         });
@@ -164,11 +164,11 @@ export default function About() {
             ease: "power2.inOut",
             scrollTrigger: {
               trigger: "#about",
-              start: "40% top",
-              end: "40% top",
+              start: "25% top",
+              end: "25% top",
               toggleActions: "play none reverse none",
             },
-          }
+          },
         );
       });
 
@@ -180,14 +180,15 @@ export default function About() {
           opacity: 1,
           y: 0,
           duration: 1.5,
+
           ease: "power2.inOut",
           scrollTrigger: {
             trigger: "#about",
-            start: "40% top",
-            end: "40% top",
+            start: "25% top",
+            end: "25% top",
             toggleActions: "play none reverse none",
           },
-        }
+        },
       );
 
       // Animate SVG paths drawing
@@ -206,8 +207,8 @@ export default function About() {
           ease: "power2.inOut",
           scrollTrigger: {
             trigger: "#about",
-            start: "40% top",
-            end: "40% top",
+            start: "25% top",
+            end: "25% top",
             toggleActions: "play none reverse none",
           },
         });
@@ -230,7 +231,7 @@ export default function About() {
             scalable web applications.
           </p>
         </div>
-        <div id="skills-container" className="h-[100vh]">
+        <div id="skills-container" className="h-[100vh] pt-10">
           <div className="grid md:grid-cols-3 gap-8 relative">
             {skills.map((skill, index) => (
               <div
