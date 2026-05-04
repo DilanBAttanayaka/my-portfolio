@@ -38,42 +38,43 @@ const projectsData = {
       },
     ],
     role: `Led frontend development for a premium coffee e-commerce platform using Next.js 14, React 18, and TypeScript. Built responsive UI components with Ant Design and Tailwind CSS, implemented Redux Toolkit for state management, and integrated PayHere payment processing. Delivered optimized user experiences across all devices with intuitive shopping flows and form validation.`,
+    images: [1, 2, 3, 4],
   },
-  "ai-content-writer": {
-    title: "AI Content Writer",
+  "hospital-management": {
+    title: "Hospital Management",
     techs: [
       { name: "Next.js 14", icon: "/svgs/nextjs.svg" },
       { name: "React", icon: "/svgs/react.svg" },
       { name: "TypeScript", icon: "/svgs/typescript.svg" },
       { name: "Tailwind CSS", icon: "/svgs/tailwind.svg" },
-      { name: "Radix UI", icon: "/svgs/radixui.svg" },
-      { name: "TipTap", icon: "/svgs/tipTap.svg" },
+      { name: "Material UI", icon: "/svgs/materialui2.svg" },
     ],
     description:
-      "A comprehensive AI-powered SEO content generation and optimization platform that revolutionizes content creation for businesses and marketers.",
+      "A comprehensive, robust platform designed to streamline healthcare operations through integrated inventory, staff, and financial management modules.",
     features: [
       {
-        title: "AI-Powered Content Generation",
+        title: "Integrated POS System",
         description:
-          "One-click article generation, advanced content creation with customizable structure, social media content generation, product reviews, content humanizer, and real-time generation with WebSocket subscriptions",
+          "Full-featured Point of Sale system for pharmacy and hospital services, integrated with inventory and financial records for real-time tracking.",
       },
       {
-        title: "AI Image Generation & Integration",
+        title: "Offline App Capability",
         description:
-          "Text-to-image generation with multiple art styles, Unsplash integration for stock photos, smart image sizing, and seamless integration into content creation workflow",
+          "Enabling offline access and local data storage, ensuring critical hospital functions remain available during connectivity issues.",
       },
       {
-        title: "Advanced Rich Text Editor",
+        title: "Comprehensive Resource Management",
         description:
-          "TipTap-powered professional editor with visual heading indicators, advanced formatting options, AI content enhancement tools, and in-editor AI assistance for rephrasing and summarizing",
+          "Advanced modules for inventory tracking, supplier management, employee scheduling, and financial accounting integrated into a single unified dashboard.",
       },
       {
-        title: "Modern User Experience",
+        title: "Modern UI/UX with MUI",
         description:
-          "Responsive design with dark/light mode support, real-time chat interface, generation history tracking, and optimized performance across all devices",
+          "Built with Material UI to provide a clean and functional interface for healthcare professionals to navigate complex data efficiently.",
       },
     ],
-    role: `Front End Developer for an AI-powered SEO content generation platform using Next.js 14, React, and TypeScript. Built responsive UI components with Radix UI and Shadcn/ui, implemented ProseMirror rich text editor with advanced formatting, and integrated real-time WebSocket connections for live content generation. Created intuitive user interfaces for AI content enhancement tools, developed theme switching functionality, and optimized frontend performance for handling complex content workflows.`,
+    role: `Front End Developer for a robust Hospital Management System using Next.js 14, TypeScript, and Material UI. Developed an integrated POS system for hospital services and implemented features for offline capability. Built complex management modules for inventory, staff, and finance, ensuring a seamless and reliable user experience for healthcare providers.`,
+    images: [1],
   },
   "cafe-finder": {
     title: "Cafe Finder",
@@ -110,9 +111,10 @@ const projectsData = {
       },
     ],
     role: `Front End Developer for a comprehensive cafe discovery platform using Next.js 14, TypeScript, and Supabase. Integrated Supabase API calls for authentication, data fetching, and real-time updates. Implemented Google Maps API integration for location services and interactive mapping features. Built responsive UI components with Radix UI, React Hook Form for form handling, and Zod for schema validation. Delivered optimized user experiences with modern frontend architecture and performance optimization.`,
+    images: [1, 2, 3, 4],
   },
-  twost: {
-    title: "Twost",
+  twostapp: {
+    title: "TwoStapp",
     techs: [
       { name: "Next.js 15", icon: "/svgs/nextjs.svg" },
       { name: "React 19", icon: "/svgs/react.svg" },
@@ -146,6 +148,80 @@ const projectsData = {
       },
     ],
     role: `Front End Developer for a food delivery order management system using Next.js 15, React 19, and TypeScript. Built responsive UI components with Radix UI, implemented React Hook Form for form validation, and integrated AWS Amplify for authentication flows. Created real-time order tracking interface with status animations, developed theme switching functionality, and optimized performance for handling large order datasets with efficient pagination and loading states.`,
+    images: [1, 2, 3, 4],
+  },
+  miiroom: {
+    title: "MiiRoom",
+    techs: [
+      { name: "Next.js 15", icon: "/svgs/nextjs.svg" },
+      { name: "React 19", icon: "/svgs/react.svg" },
+      { name: "TypeScript", icon: "/svgs/typescript.svg" },
+      { name: "Tailwind CSS 4", icon: "/svgs/tailwind.svg" },
+      { name: "AWS Amplify", icon: "/svgs/amplify.svg" },
+      { name: "Framer Motion", icon: "/svgs/framer.svg" },
+    ],
+    description:
+      "A premium short-term rental marketplace connecting property hosts with travelers, featuring a robust booking system, real-time availability tracking, and integrated map discovery.",
+    features: [
+      {
+        title: "Interactive Map Discovery",
+        description:
+          "Integrated Google Maps API to provide a seamless property search experience with location-based filtering and custom map markers for enhanced spatial awareness",
+      },
+      {
+        title: "Secure Authentication & AWS Integration",
+        description:
+          "Implemented robust user authentication and cloud connectivity using AWS Amplify and Cognito, ensuring secure guest and host account management with seamless data synchronization",
+      },
+      {
+        title: "Advanced Booking & Availability",
+        description:
+          "Developed a real-time reservation system with complex availability logic, automated booking flows, and status tracking for properties to ensure conflict-free scheduling",
+      },
+      {
+        title: "Data-Driven Host Dashboard",
+        description:
+          "Built a comprehensive dashboard for hosts using Recharts for analytics, property listing management, and earning tracking with a modern, high-performance user interface",
+      },
+    ],
+    role: `Lead Frontend Developer for a premium short-term rental platform using Next.js 15, React 19, and TypeScript. Architected the core application structure with SST (Serverless Stack) and integrated AWS Amplify for secure authentication and cloud services. Developed high-performance UI components using Tailwind CSS 4 and Framer Motion for smooth transitions. Implemented interactive mapping features with Google Maps API and complex state management using Zustand, delivering a polished, high-performance user experience for both hosts and guests.`,
+    images: [1, 2, 3, 4],
+    mobile: {
+      title: "MiiRoom Mobile App",
+      techs: [
+        { name: "React Native", icon: "/svgs/react.svg" },
+        { name: "Expo", icon: "/svgs/expo.svg" },
+        { name: "TypeScript", icon: "/svgs/typescript.svg" },
+        { name: "AWS Amplify", icon: "/svgs/amplify.svg" },
+        { name: "Zustand", icon: "/svgs/zustand.svg" },
+      ],
+      description:
+        "A dedicated mobile application for MiiRoom, optimized for on-the-go property management and instant guest communication.",
+      features: [
+        {
+          title: "Real-time Push Notifications",
+          description:
+            "Instant alerts for new bookings, guest messages, and check-in reminders to keep hosts and guests synchronized at all times.",
+        },
+        {
+          title: "In-App Chat System",
+          description:
+            "Seamless messaging interface for guests to communicate directly with hosts, featuring image sharing and quick-reply templates.",
+        },
+        {
+          title: "Offline Booking Access",
+          description:
+            "Enables guests to access their reservation details and check-in instructions even without an active internet connection.",
+        },
+        {
+          title: "Mobile Listing Management",
+          description:
+            "Allow hosts to capture and upload property photos directly from their camera and update pricing on the fly.",
+        },
+      ],
+      role: `Lead Developer for MiiRoom Mobile App. Built the cross-platform application using React Native and Expo. Implemented real-time messaging using AWS AppSync and Push Notifications with Pinpoint. Focused on creating a high-fidelity mobile experience with smooth gesture-driven interactions and offline-first data persistence.`,
+      images: [1, 2, 3, 4],
+    },
   },
 };
 
@@ -161,7 +237,7 @@ export default async function ProjectPage({
     notFound();
   }
 
-  return <ProjectDetail project={project} />;
+  return <ProjectDetail project={{ ...project, slug }} />;
 }
 
 export async function generateStaticParams() {

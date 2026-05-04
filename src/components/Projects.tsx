@@ -18,33 +18,36 @@ const workContent = {
       description:
         "Full-stack e-commerce platform for premium coffee business in Sri Lanka",
       buttonText: "View Details",
+      link: "https://beanempirecoffee.com/",
       image: { alt: "Bean Empire E-commerce Platform" },
     },
     {
       number: "02",
-      title: "Cafe Finder",
-      slug: "cafe-finder",
+      title: "MiiRoom",
+      slug: "miiroom",
       description:
-        "Modern web application for discovering and reviewing coffee shops",
+        "Comprehensive short-term rental marketplace with real-time booking and interactive discovery",
       buttonText: "View Details",
-      image: { alt: "Cafe Finder Application" },
+      link: "https://dev.jipify.com/",
+      image: { alt: "MiiRoom Booking Platform" },
     },
     {
       number: "03",
-      title: "AI Content Writer",
-      slug: "ai-content-writer",
+      title: "Hospital Management",
+      slug: "hospital-management",
       description:
-        "AI-powered SEO content generation and optimization platform",
+        "Comprehensive platform integrating inventory, staff, and finance modules to streamline healthcare operations and management.",
       buttonText: "View Details",
-      image: { alt: "AI Content Writer Platform" },
+      image: { alt: "Hospital Management System Platform" },
     },
     {
       number: "04",
-      title: "Twost",
-      slug: "twost",
+      title: "TwoStapp",
+      slug: "twostapp",
       description: "Food delivery order management system for restaurants",
       buttonText: "View Details",
-      image: { alt: "Twost Order Management System" },
+      link: "https://www.twostapp.com/",
+      image: { alt: "TwoStapp Order Management System" },
     },
   ],
 };
@@ -109,7 +112,7 @@ export default function Projects() {
             },
           })
           .to("#work-content", {
-            backgroundColor: "#0c2f25",
+            backgroundColor: "#374D48",
             duration: 1,
           });
 
@@ -123,7 +126,7 @@ export default function Projects() {
             },
           })
           .to("#work-content", {
-            backgroundColor: "#11122f",
+            backgroundColor: "#072230",
             duration: 1,
           });
 
@@ -223,7 +226,7 @@ export default function Projects() {
             end: "bottom 20%",
             toggleActions: "play none none reverse",
           },
-        }
+        },
       );
 
       // Animate project cards
@@ -243,7 +246,7 @@ export default function Projects() {
               end: "bottom 20%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       });
     }, sectionRef);
@@ -281,12 +284,12 @@ export default function Projects() {
             id="work-image"
             className="absolute top-0 w-full sm:w-[50%] h-screen right-0 z-[20] flex justify-center items-center"
           >
-            <div className="aspect-[2573/1699] w-[424px] sm:w-[494px] md:w-[636px] h-[280px] sm:h-[326px] md:h-[420px] overflow-hidden rounded-[48px] shadow-xl relative mx-auto sm:mr-[5%] md:mr-[20%]">
+            <div className="aspect-[2573/1699] w-[424px] sm:w-[494px] md:w-[636px] h-[280px] sm:h-[326px] md:h-[420px] lg:w-full lg:h-auto  overflow-hidden rounded-[48px] shadow-xl relative mx-auto sm:mr-[5%] md:mr-[20%]">
               <Image
                 src="/project1.png"
                 alt={workContent.projects[0].image.alt}
-                width={680}
-                height={449}
+                width={1020}
+                height={675}
                 className="object-cover w-full h-full absolute top-0 left-0"
                 id="image-1"
                 priority
@@ -294,8 +297,8 @@ export default function Projects() {
               <Image
                 src="/project2.png"
                 alt={workContent.projects[1].image.alt}
-                width={680}
-                height={449}
+                width={1020}
+                height={675}
                 className="object-cover w-full h-full absolute top-0 left-0"
                 id="image-2"
                 priority
@@ -303,8 +306,8 @@ export default function Projects() {
               <Image
                 src="/project3.png"
                 alt={workContent.projects[2].image.alt}
-                width={680}
-                height={449}
+                width={1020}
+                height={675}
                 className="object-cover w-full h-full absolute top-0 left-0"
                 id="image-3"
                 priority
@@ -312,8 +315,8 @@ export default function Projects() {
               <Image
                 src="/project4.png"
                 alt={workContent.projects[3].image.alt}
-                width={680}
-                height={449}
+                width={1020}
+                height={675}
                 className="object-cover w-full h-full absolute top-0 left-0"
                 id="image-4"
                 priority
@@ -335,7 +338,7 @@ export default function Projects() {
                 key={index}
                 className="flex items-center h-screen w-full sm:w-[50%] justify-center z-100"
               >
-                <div className="flex flex-col gap-4 items-start max-w-md">
+                <div className="flex flex-col gap-4 items-start max-w-lg">
                   <div className="flex gap-2 items-center justify-center">
                     <div
                       ref={(el) => {
@@ -362,9 +365,26 @@ export default function Projects() {
                   <p className="text-white/80 text-lg lg:text-xl">
                     {project.description}
                   </p>
+                  {(project as any).link && (
+                    <a
+                      href={(project as any).link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/60 hover:text-white transition-colors underline underline-offset-4 block"
+                    >
+                      {(project as any).link
+                        .replace(/^https?:\/\/(www\.)?/, "")
+                        .replace(/\/$/, "")}
+                    </a>
+                  )}
+                  {(project as any).link === "https://dev.jipify.com/" && (
+                    <span className="text-white/60 text-sm">
+                      -Under development
+                    </span>
+                  )}
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="px-6 py-3 border border-white text-white rounded-lg hover:bg-white hover:text-black transition-colors"
+                    className="px-6 py-3 border mt-2 border-white text-white rounded-lg hover:bg-white hover:text-black transition-colors"
                   >
                     {project.buttonText || "View"}
                   </Link>

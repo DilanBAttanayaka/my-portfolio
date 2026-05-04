@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -12,6 +12,31 @@ import ArrowDown from "./ArrowDown";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectDetail({ project }: { project: any }) {
+  const [activeSection, setActiveSection] = useState(0);
+  const [platform, setPlatform] = useState<"web" | "mobile">("web");
+  const [expandedFeatures, setExpandedFeatures] = useState<Set<number>>(
+    new Set(),
+  );
+  const chipRef = useRef<HTMLDivElement>(null);
+
+  const handlePlatformChange = (newPlatform: "web" | "mobile") => {
+    if (newPlatform === platform) return;
+    const chip = chipRef.current;
+    if (chip) {
+      const chipWidth = chip.offsetWidth;
+      gsap.to(chip, {
+        x: newPlatform === "web" ? 0 : chipWidth,
+        duration: 0.35,
+        ease: "power2.inOut",
+      });
+    }
+    setPlatform(newPlatform);
+  };
+
+  const currentData = platform === "mobile" ? project.mobile : project;
+  const currentSlug =
+    platform === "mobile" ? `${project.slug}-mobile` : project.slug;
+
   const defaultTechs = [
     { name: "React", icon: "/svgs/react.svg" },
     { name: "Next.js", icon: "/svgs/nextjs.svg" },
@@ -20,10 +45,7 @@ export default function ProjectDetail({ project }: { project: any }) {
     { name: "TypeScript", icon: "/svgs/typescript.svg" },
     { name: "PayHere", icon: "/svgs/payhere.png" },
   ];
-  const [activeSection, setActiveSection] = useState(0);
-  const [expandedFeatures, setExpandedFeatures] = useState<Set<number>>(
-    new Set()
-  );
+
   const scrollToSection = (index: any) => {
     const container = document.getElementById("sections-container");
     if (!container) return;
@@ -43,15 +65,31 @@ export default function ProjectDetail({ project }: { project: any }) {
   const toggleFeature = (index: number) => {
     const newExpanded = new Set(expandedFeatures);
     if (newExpanded.has(index)) {
-      // Collapsing - just remove this one
       newExpanded.delete(index);
     } else {
-      // Expanding - collapse all others first, then add this one
       newExpanded.clear();
       newExpanded.add(index);
     }
     setExpandedFeatures(newExpanded);
   };
+
+  // Separate effect for platform changes — just resets section states without rebuilding GSAP
+  useEffect(() => {
+    const sections = [
+      "#tech-content",
+      "#description-content",
+      "#features-content",
+      "#role-content",
+    ];
+    sections.forEach((id, index) => {
+      if (index === activeSection) {
+        gsap.set(id, { height: "auto", opacity: 1, y: 0 });
+      } else {
+        gsap.set(id, { height: 0, opacity: 0, y: 100 });
+      }
+    });
+    ScrollTrigger.refresh();
+  }, [platform, activeSection]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -67,7 +105,6 @@ export default function ProjectDetail({ project }: { project: any }) {
         start: "top top",
         end: `+=${window.innerHeight * 2}`,
         pin: "#sections-content",
-
         pinSpacing: false,
       });
 
@@ -75,27 +112,29 @@ export default function ProjectDetail({ project }: { project: any }) {
       const imageTrack = document.querySelector("#image-track");
       if (imageTrack) {
         const images = imageTrack.querySelectorAll(".gallery-image");
-        const trackWidth = images.length * window.innerWidth;
+        if (images.length > 1) {
+          const trackWidth = images.length * window.innerWidth;
 
-        gsap.to(imageTrack, {
-          x: -(trackWidth - window.innerWidth),
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#gallery-section",
-            start: "top top",
-            end: `+=${window.innerHeight * 3}`,
-            pin: true,
-            scrub: 1,
-          },
-        });
+          gsap.to(imageTrack, {
+            x: -(trackWidth - window.innerWidth),
+            ease: "none",
+            scrollTrigger: {
+              trigger: "#gallery-section",
+              start: "top top",
+              end: `+=${window.innerHeight * (images.length - 1 + 1)}`,
+              pin: true,
+              scrub: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+        }
       }
 
-      // Section 1: Tech -> Description (8%)
+      // Section animations (Tech -> Description -> Features -> Role)
       ScrollTrigger.create({
         trigger: "#sections-container",
         start: "15% top",
         end: "30% top",
-
         onEnter: () => {
           setActiveSection(1);
           gsap.to("#tech-content", {
@@ -128,12 +167,10 @@ export default function ProjectDetail({ project }: { project: any }) {
         },
       });
 
-      // Section 2: Description -> Features (16%)
       ScrollTrigger.create({
         trigger: "#sections-container",
         start: "30% top",
         end: "45% top",
-
         onEnter: () => {
           setActiveSection(2);
           gsap.to("#description-content", {
@@ -166,12 +203,10 @@ export default function ProjectDetail({ project }: { project: any }) {
         },
       });
 
-      // Section 3: Features -> Role (50%)
       ScrollTrigger.create({
         trigger: "#sections-container",
         start: "45% top",
         end: "60% top",
-
         onEnter: () => {
           setActiveSection(3);
           gsap.to("#features-content", {
@@ -220,7 +255,7 @@ export default function ProjectDetail({ project }: { project: any }) {
             <ArrowLeft className="w-3 h-3" /> Back
           </Link>
           <h1 className="text-xl font-bold text-white uppercase">
-            {project.title}
+            {currentData.title}
           </h1>
           <div className="w-24" />
         </div>
@@ -229,6 +264,49 @@ export default function ProjectDetail({ project }: { project: any }) {
       {/* Sections Container */}
       <div id="sections-container" className="h-[280vh] relative pt-[20vh]">
         <div id="sections-content" className="max-w-7xl mx-auto px-6 pb-10">
+          {/* Platform Toggle */}
+          {project.mobile && (
+            <div className="flex justify-center mb-12 relative z-[100]">
+              <div className="bg-stone-800 p-1 rounded-full border border-stone-700 flex items-center shadow-xl relative min-w-[240px]">
+                {/* Animated Background Chip */}
+                <div
+                  ref={chipRef}
+                  style={{
+                    position: "absolute",
+                    top: "4px",
+                    left: "4px",
+                    width: "calc(50% - 4px)",
+                    height: "calc(100% - 8px)",
+                    borderRadius: "9999px",
+                    backgroundColor: "#2563eb",
+                    boxShadow: "0 2px 8px rgba(37,99,235,0.4)",
+                  }}
+                />
+
+                <button
+                  onClick={() => handlePlatformChange("web")}
+                  className={`relative z-10 flex-1 px-6 py-2 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-300 ${
+                    platform === "web"
+                      ? "text-white"
+                      : "text-stone-400 hover:text-stone-200"
+                  }`}
+                >
+                  Web App
+                </button>
+                <button
+                  onClick={() => handlePlatformChange("mobile")}
+                  className={`relative z-10 flex-1 px-3 py-3 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-300 ${
+                    platform === "mobile"
+                      ? "text-white"
+                      : "text-stone-400 hover:text-stone-200"
+                  }`}
+                >
+                  Mobile App
+                </button>
+              </div>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Side - Section Titles */}
             <div className="space-y-4">
@@ -296,7 +374,7 @@ export default function ProjectDetail({ project }: { project: any }) {
                   id="tech-content"
                   className="text-stone-300 text-lg leading-relaxed whitespace-pre-line overflow-hidden absolute top-0 left-0 w-full p-6"
                 >
-                  <TechBadges techs={project.techs || defaultTechs} />
+                  <TechBadges techs={currentData.techs || defaultTechs} />
                 </div>
 
                 <div
@@ -305,8 +383,7 @@ export default function ProjectDetail({ project }: { project: any }) {
                 >
                   <div className="bg-stone-700/30 p-4 rounded-lg flex items-start gap-2 flex-1 min-w-0">
                     <div className="w-2 h-2 bg-blue-400 rounded-full mt-3 flex-shrink-0"></div>
-
-                    {project.description}
+                    {currentData.description}
                   </div>
                 </div>
 
@@ -315,10 +392,10 @@ export default function ProjectDetail({ project }: { project: any }) {
                   className="text-stone-300 text-lg leading-relaxed overflow-hidden absolute top-0 left-0 w-full p-6 z-10"
                 >
                   <div className="grid grid-cols-1 gap-3">
-                    {project.features?.map(
+                    {currentData.features?.map(
                       (
                         feature: { title: string; description: string },
-                        index: number
+                        index: number,
                       ) => {
                         const isExpanded = expandedFeatures.has(index);
                         return (
@@ -340,9 +417,9 @@ export default function ProjectDetail({ project }: { project: any }) {
                               </div>
                               <div className="ml-4 flex-shrink-0">
                                 {isExpanded ? (
-                                  <ChevronUp className="w-5 h-5 text-stone-400 group-hover:text-blue-300 transition-colors flex-shrink-0" />
+                                  <ChevronUp className="w-5 h-5 text-stone-400 group-hover:text-blue-300 transition-colors" />
                                 ) : (
-                                  <ChevronDown className="w-5 h-5 text-stone-400 group-hover:text-blue-300 transition-colors flex-shrink-0" />
+                                  <ChevronDown className="w-5 h-5 text-stone-400 group-hover:text-blue-300 transition-colors" />
                                 )}
                               </div>
                             </button>
@@ -355,7 +432,7 @@ export default function ProjectDetail({ project }: { project: any }) {
                             )}
                           </div>
                         );
-                      }
+                      },
                     )}
                   </div>
                 </div>
@@ -366,8 +443,7 @@ export default function ProjectDetail({ project }: { project: any }) {
                 >
                   <div className="bg-stone-700/30 p-4 rounded-lg flex items-start gap-2 flex-1 min-w-0">
                     <div className="w-2 h-2 bg-blue-400 rounded-full mt-3 flex-shrink-0"></div>
-
-                    {project.role}
+                    {currentData.role}
                   </div>
                 </div>
               </div>
@@ -375,7 +451,7 @@ export default function ProjectDetail({ project }: { project: any }) {
           </div>
         </div>
 
-        <div className="flex justify-center fixed top-80% left-0 right-0">
+        <div className="flex justify-center fixed top-[80%] left-0 right-0">
           <ArrowDown className="w-64 h-64 text-stone-400" />
         </div>
       </div>
@@ -387,51 +463,56 @@ export default function ProjectDetail({ project }: { project: any }) {
       >
         <div className="h-full flex items-center">
           <div id="image-track" className="flex h-full">
-            <div className="gallery-image w-screen h-full flex-shrink-0 flex items-center justify-center px-12">
-              <div className="relative w-full max-w-5xl h-[70vh] rounded-lg overflow-hidden">
-                <Image
-                  src="/project1.png"
-                  alt="Project screenshot 1"
-                  fill
-                  className="object-cover"
-                />
+            {(currentData.images || [1]).map((num: number) => (
+              <div
+                key={`${platform}-${num}`}
+                className="gallery-image w-screen h-full flex-shrink-0 flex items-center justify-center px-12"
+              >
+                {platform === "mobile" ? (
+                  /* Portrait phone frame for mobile screenshots */
+                  <div
+                    className="relative flex-shrink-0"
+                    style={{
+                      height: "78vh",
+                      aspectRatio: "9 / 19",
+                    }}
+                  >
+                    {/* Phone shell */}
+                    <div className="absolute inset-0 rounded-[2rem] border-[6px] border-stone-600 bg-black shadow-2xl overflow-hidden">
+                      {/* Notch */}
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-stone-900 rounded-b-xl z-10" />
+                      <Image
+                        src={`/projects/${currentSlug}/${num}.png`}
+                        alt={`${currentData.title} screenshot ${num}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  /* Landscape frame for web screenshots */
+                  <div
+                    className="relative flex-shrink-0 rounded-lg overflow-hidden shadow-2xl"
+                    style={{
+                      height: "70vh",
+                      aspectRatio: "16 / 9",
+                    }}
+                  >
+                    <Image
+                      src={`/projects/${currentSlug}/${num}.png`}
+                      alt={`${currentData.title} screenshot ${num}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
               </div>
-            </div>
-            <div className="gallery-image w-screen h-full flex-shrink-0 flex items-center justify-center px-12">
-              <div className="relative w-full max-w-5xl h-[70vh] rounded-lg overflow-hidden">
-                <Image
-                  src="/project2.png"
-                  alt="Project screenshot 2"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-            <div className="gallery-image w-screen h-full flex-shrink-0 flex items-center justify-center px-12">
-              <div className="relative w-full max-w-5xl h-[70vh] rounded-lg overflow-hidden">
-                <Image
-                  src="/project3.png"
-                  alt="Project screenshot 3"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-            <div className="gallery-image w-screen h-full flex-shrink-0 flex items-center justify-center px-12">
-              <div className="relative w-full max-w-5xl h-[70vh] rounded-lg overflow-hidden">
-                <Image
-                  src="/project4.png"
-                  alt="Project screenshot 4"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="bg-stone-800 border-t border-stone-700 py-24 ">
+      <div className="bg-stone-800 border-t border-stone-700 py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h3 className="text-3xl font-bold text-white mb-6">
             Interested in working together?

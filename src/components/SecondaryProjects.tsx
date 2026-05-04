@@ -27,13 +27,11 @@ const secondaryProjects = [
   },
   {
     id: 3,
-    title: "Navinne Hospital Management System",
-    description:
-      "Full staff, Patient, and inventory management including POS for pharmacy",
-    image: "",
-    svg: "/svgs/navinne.png",
-    tags: ["Next.js 13", "TypeScript", "MUI", "Redux"],
-    hasImage: false,
+    title: "Cafe Finder",
+    description: "Modern web application for discovering and reviewing coffee shops",
+    image: "/projects/cafe-finder/1.png",
+    tags: ["Next.js 14", "TypeScript", "Tailwind CSS", "Supabase"],
+    hasImage: true,
   },
   {
     id: 4,
@@ -127,15 +125,20 @@ export default function SecondaryProjects() {
                   />
                 </div>
               ) : null}
-              <div className={project.hasImage || project.svg ? "p-4" : ""}>
+              <div className={project.hasImage || (project as any).svg ? "p-4" : "p-6"}>
+                {(project as any).subtitle && (
+                  <p className="text-blue-600 font-bold text-[10px] mb-1 uppercase tracking-wider">
+                    {(project as any).subtitle}
+                  </p>
+                )}
                 <h3
                   className={`font-bold text-stone-900 mb-2 ${
-                    project.hasImage || project.svg ? "text-xl" : "text-lg"
+                    project.hasImage || (project as any).svg ? "text-xl" : "text-lg"
                   }`}
                 >
                   {project.title}
                 </h3>
-                <p className="text-stone-600 mb-3 text-sm">
+                <p className="text-stone-600 mb-3 text-sm leading-relaxed">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-1">
