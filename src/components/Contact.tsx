@@ -20,11 +20,11 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      text: "your.email@example.com",
-      href: "mailto:your.email@example.com",
+      text: "dilanattanayakaya@gmail.com",
+      href: "mailto:dilanattanayakaya@gmail.com",
     },
-    { icon: Phone, text: "+1 (555) 123-4567", href: "tel:+15551234567" },
-    { icon: MapPin, text: "Your City, Country", href: "#" },
+    { icon: Phone, text: "+94 76 613 8729", href: "tel:+94766138729" },
+    { icon: MapPin, text: "Matale, Sri Lanka", href: "#" },
   ];
 
   const socialLinks = [
