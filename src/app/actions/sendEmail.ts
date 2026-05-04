@@ -3,6 +3,7 @@
 import { Resend } from "resend";
 import ContactEmail from "@/emails/ContactEmail";
 import React from "react";
+import { render } from "@react-email/render";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -17,17 +18,21 @@ export async function sendEmail(formData: FormData) {
   }
 
   try {
-    const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact Form <onboarding@resend.dev>",
-      to: [process.env.CONTACT_EMAIL || "dilanattanayakaya@gmail.com"], // Fallback if env not set
-      subject: `New Message: ${subject}`,
-      replyTo: email,
-      react: React.createElement(ContactEmail, {
+    const emailHtml = await render(
+      React.createElement(ContactEmail, {
         name,
         email,
         subject,
         message,
-      }),
+      })
+    );
+
+    const { data, error } = await resend.emails.send({
+      from: "Portfolio Contact Form <onboarding@resend.dev>",
+      to: [process.env.CONTACT_EMAIL || "dilanattanayakaya@gmail.com"],
+      subject: `New Message: ${subject}`,
+      replyTo: email,
+      html: emailHtml,
     });
 
     if (error) {

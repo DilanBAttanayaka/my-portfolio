@@ -1,7 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+  Twitter,
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+} from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { sendEmail } from "@/app/actions/sendEmail";
@@ -14,7 +24,9 @@ export default function Contact() {
   const contactInfoRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
   const contactInfo = [
@@ -28,9 +40,16 @@ export default function Contact() {
   ];
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Twitter, href: "#", label: "Twitter" },
+    {
+      icon: Github,
+      href: "https://github.com/DilanBAttanayaka",
+      label: "GitHub",
+    },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/dilan-attanayake-015343175",
+      label: "LinkedIn",
+    },
   ];
 
   useEffect(() => {
@@ -50,7 +69,7 @@ export default function Contact() {
             end: "bottom 20%",
             toggleActions: "play none none reverse",
           },
-        }
+        },
       );
 
       // Animate contact info
@@ -68,7 +87,7 @@ export default function Contact() {
             end: "bottom 20%",
             toggleActions: "play none none reverse",
           },
-        }
+        },
       );
 
       // Animate form
@@ -86,7 +105,7 @@ export default function Contact() {
             end: "bottom 20%",
             toggleActions: "play none none reverse",
           },
-        }
+        },
       );
     }, sectionRef);
 
@@ -185,7 +204,7 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div ref={formRef}>
-            <form 
+            <form
               onSubmit={handleSubmit}
               className="bg-neutral-800/50 p-8 rounded-lg shadow-lg border border-stone-700/50"
             >
@@ -259,14 +278,18 @@ export default function Contact() {
               {status === "success" && (
                 <div className="mb-6 flex items-center gap-3 p-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg animate-in fade-in slide-in-from-top-2">
                   <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
-                  <p className="text-sm font-medium">Message sent successfully! I&apos;ll get back to you soon.</p>
+                  <p className="text-sm font-medium">
+                    Message sent successfully! I&apos;ll get back to you soon.
+                  </p>
                 </div>
               )}
 
               {status === "error" && (
                 <div className="mb-6 flex items-center gap-3 p-4 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-lg animate-in fade-in slide-in-from-top-2">
                   <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                  <p className="text-sm font-medium">{errorMessage || "Something went wrong. Please try again."}</p>
+                  <p className="text-sm font-medium">
+                    {errorMessage || "Something went wrong. Please try again."}
+                  </p>
                 </div>
               )}
 

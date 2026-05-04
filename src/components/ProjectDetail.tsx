@@ -451,8 +451,8 @@ export default function ProjectDetail({ project }: { project: any }) {
           </div>
         </div>
 
-        <div className="flex justify-center fixed top-[80%] left-0 right-0">
-          <ArrowDown className="w-64 h-64 text-stone-400" />
+        <div className="flex justify-center fixed top-[75%] left-0 right-0 pointer-events-none">
+          <ArrowDown className="w-64 h-64 text-stone-400 " />
         </div>
       </div>
 
