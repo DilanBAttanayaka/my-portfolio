@@ -74,7 +74,7 @@ const projectsData = {
       },
     ],
     role: `Front End Developer for a robust Hospital Management System using Next.js 14, TypeScript, and Material UI. Developed an integrated POS system for hospital services and implemented features for offline capability. Built complex management modules for inventory, staff, and finance, ensuring a seamless and reliable user experience for healthcare providers.`,
-    images: [1],
+    images: [1, 2, 3, 4],
   },
   "cafe-finder": {
     title: "Cafe Finder",
