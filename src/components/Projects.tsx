@@ -282,7 +282,7 @@ export default function Projects() {
           </div>
           <div
             id="work-image"
-            className="absolute top-0 w-full sm:w-[50%] h-screen right-0 z-[20] flex justify-center items-center"
+            className="absolute top-0 w-full sm:w-[50%] h-screen right-0 z-[20] flex justify-center items-end sm:items-center pb-32 sm:pb-0"
           >
             <div className="aspect-[2573/1699] w-[424px] sm:w-[494px] md:w-[636px] h-[280px] sm:h-[326px] md:h-[420px] lg:w-full lg:h-auto  overflow-hidden rounded-[48px] shadow-xl relative mx-auto sm:mr-[5%] md:mr-[20%]">
               <Image
@@ -331,14 +331,14 @@ export default function Projects() {
           ></div>
           <div
             id="work-content-old"
-            className="absolute flex flex-col justify-center items-center sm:block top-0 left-0 sm:pl-10 right-0 h-[400vh] z-20 bg-black/40 sm:bg-transparent"
+            className="absolute flex flex-col justify-center items-center sm:block top-0 left-0 sm:pl-10 right-0 h-[400vh] z-20 bg-transparent"
           >
             {workContent.projects.map((project, index) => (
               <div
                 key={index}
-                className="flex items-center h-screen w-full sm:w-[50%] justify-center z-100"
+                className="flex items-start sm:items-center h-screen w-full sm:w-[50%] justify-center pt-10 sm:pt-0 z-100 px-4 sm:px-0"
               >
-                <div className="flex flex-col gap-4 items-start max-w-lg">
+                <div className="flex flex-col gap-4 items-start max-w-lg sm:bg-transparent bg-black/30 p-6 sm:p-0 rounded-2xl">
                   <div className="flex gap-2 items-center justify-center">
                     <div
                       ref={(el) => {

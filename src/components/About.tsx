@@ -118,7 +118,10 @@ export default function About() {
   ];
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
+      // Desktop Animations
       // Animate header
       gsap.fromTo(
         "#about-header",
@@ -276,7 +279,88 @@ export default function About() {
         },
       );
 
-      // Animate SVG paths drawing
+      // Animate SVG paths
+      const paths = document.querySelectorAll("#experience-icon .draw-path");
+      paths.forEach((path, index) => {
+        const length = (path as SVGPathElement).getTotalLength();
+        gsap.set(path, {
+          strokeDasharray: length,
+          strokeDashoffset: length,
+        });
+        gsap.to(path, {
+          strokeDashoffset: 0,
+          duration: 1.6,
+          delay: index * 0.1,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: "#trigger",
+            start: "25% top",
+            toggleActions: "play none reverse none",
+          },
+        });
+      });
+    });
+
+    mm.add("(max-width: 767px)", () => {
+      // Mobile Animations
+      // Simple entry for header and bio
+      gsap.fromTo(
+        "#about-header, #about-bio",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: "#about",
+            start: "top 85%",
+          },
+        },
+      );
+
+      // Skills cards simple entry
+      [0, 1, 2].forEach((index) => {
+        gsap.fromTo(
+          `#skill-card-${index}`,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: `#skill-card-${index}`,
+              start: "top 90%",
+            },
+          },
+        );
+
+        // Auto-expand on mobile without pinning
+        gsap.set(
+          [`#skill-description-${index}`, `#skill-tech-icons-${index}`],
+          {
+            height: "auto",
+            opacity: 1,
+          },
+        );
+      });
+
+      // Experience card simple entry
+      gsap.fromTo(
+        "#experience-card",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: "#experience-card",
+            start: "top 90%",
+          },
+        },
+      );
+
+      // Still draw the icon paths on mobile
       const paths = document.querySelectorAll("#experience-icon .draw-path");
       paths.forEach((path, index) => {
         const length = (path as SVGPathElement).getTotalLength();
@@ -291,16 +375,14 @@ export default function About() {
           delay: index * 0.1,
           ease: "power2.inOut",
           scrollTrigger: {
-            trigger: "#trigger",
-            start: "25% top",
-            end: "25% top",
-            toggleActions: "play none reverse none",
+            trigger: "#experience-card",
+            start: "top 80%",
           },
         });
       });
     });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
@@ -340,7 +422,7 @@ export default function About() {
             </div>
 
             {/* Right — quick-fact pills */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
                 { value: "3+", label: "Years of Experience" },
                 { value: "8+", label: "Production Projects" },
@@ -363,8 +445,8 @@ export default function About() {
           </div>
         </div>
         <div id="trigger" className="pt-10">
-          <div id="skills-container" className="h-[100vh]">
-            <div className="grid md:grid-cols-3 gap-8 relative">
+          <div id="skills-container" className="h-auto md:h-[100vh]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
               {skills.map((skill, index) => (
                 <div
                   key={skill.title}
@@ -451,7 +533,7 @@ export default function About() {
               {/* Experience Card */}
               <div
                 id="experience-card"
-                className="absolute top-0 md:left-[calc(33.33%+1rem)] right-0 md:right-0 opacity-0 p-8 min-h-[430px] rounded-lg bg-stone-900/50 hover:bg-stone-900/70 transition-colors border border-stone-600/50"
+                className="relative md:absolute top-0 md:left-[calc(33.33%+1rem)] right-0 md:right-0 opacity-0 p-6 md:p-8 min-h-[430px] rounded-lg bg-stone-900/50 hover:bg-stone-900/70 transition-colors border border-stone-600/50"
               >
                 <h3 className="text-2xl font-semibold text-white mb-6 flex items-center gap-4">
                   <svg
@@ -532,8 +614,8 @@ export default function About() {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center">
-              <ArrowDown className="w-64 h-64 text-stone-400" />
+            <div className="flex justify-center mt-12 md:mt-0">
+              <ArrowDown className="w-32 h-32 md:w-64 md:h-64 text-stone-400" />
             </div>
           </div>
         </div>

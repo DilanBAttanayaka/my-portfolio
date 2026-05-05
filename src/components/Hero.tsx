@@ -174,7 +174,7 @@ export default function Hero() {
     <section
       ref={heroRef}
       id="home"
-      className="min-h-screen flex items-center relative"
+      className="min-h-[100dvh] flex items-center relative overflow-hidden"
     >
       {/* Animated SVG shapes */}
       <svg
@@ -225,18 +225,18 @@ export default function Hero() {
       <div className="container mx-auto px-4 w-full">
         <div className="grid items-center gap-10 md:gap-12 md:grid-cols-2">
           {/* Left: Text content */}
-          <div ref={contentRef} className="text-left">
-            <h1 className="text-4xl md:text-6xl font-bold text-blue-400/80 mb-4">
+          <div ref={contentRef} className="text-center md:text-left z-10">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-blue-400/80 mb-4">
               Hello, I&apos;m Dilan
             </h1>
             <h2 className="text-xl md:text-2xl font-semibold text-stone-300 mb-4">
               Frontend Developer
             </h2>
-            <p className="text-base md:text-lg text-gray-300 mb-8 max-w-xl">
+            <p className="text-base md:text-lg text-gray-300 mb-8 max-w-xl mx-auto md:mx-0">
               With over 3 years of experience, I specialize in creating fast,
               responsive, and accessible web applications.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap justify-center md:justify-start gap-4">
               <a
                 href="#projects"
                 className="bg-stone-700 text-white px-6 py-3 rounded-lg hover:bg-stone-600 transition-colors"
@@ -257,16 +257,15 @@ export default function Hero() {
               </a>
             </div>
           </div>
-          <div className="absolute bottom-[5%] left-[25%] -translate-x-1/2">
-            <ArrowDown className="w-64 text-stone-300" />
+          <div className="absolute bottom-10 left-1/2 md:left-[25%] -translate-x-1/2 hidden sm:block">
+            <ArrowDown className="w-32 md:w-64 text-stone-300" />
           </div>
 
-          {/* Right: Portrait with animated shape */}
           <div
             ref={shapeContainerRef}
-            className="relative flex items-end justify-center h-[66vh] overflow-visible"
+            className="relative flex items-center md:items-end justify-center h-[40vh] sm:h-[50vh] md:h-[66vh] overflow-visible mt-8 md:mt-0"
           >
-            <div className="relative w-[200%] md:w-[950px] aspect-square translate-y-[23%] -translate-x-[25%] overflow-visible">
+            <div className="relative w-[110%] sm:w-[90%] md:w-[950px] aspect-square translate-y-[5%] md:translate-y-[23%] md:-translate-x-[25%] overflow-visible">
               {/* Interactive organic shape background */}
               <svg
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%]"
