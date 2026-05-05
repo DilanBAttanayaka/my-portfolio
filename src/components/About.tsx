@@ -404,15 +404,15 @@ export default function About() {
           >
             {/* Left — personal paragraph */}
             <div className="relative pl-5 border-l-2 border-blue-500/50">
-              <p className="text-stone-300 text-lg leading-relaxed">
+              <p className="text-stone-300 text-lg leading-relaxed text-left">
                 I&apos;m a frontend developer who loves building things that
                 feel as good as they look. I joined{" "}
                 <span className="text-white font-medium">PhraseCode</span> early
                 as their{" "}
                 <span className="text-white font-medium">
-                  first dedicated frontend developer
+                  first dedicated frontend developer,
                 </span>{" "}
-                — taking full ownership of the frontend from the ground up. I
+                taking full ownership of the frontend from the ground up. I
                 believe great frontend work lives at the intersection of{" "}
                 <span className="text-white font-medium">
                   clean code and thoughtful design
