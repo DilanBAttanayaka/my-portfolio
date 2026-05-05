@@ -100,27 +100,29 @@ export default function ProjectDetail({ project }: { project: any }) {
         pinSpacing: false,
       });
 
-      // Horizontal scroll for images
-      const imageTrack = document.querySelector("#image-track");
-      if (imageTrack) {
-        const images = imageTrack.querySelectorAll(".gallery-image");
-        if (images.length > 1) {
-          const trackWidth = images.length * window.innerWidth;
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 768px)", () => {
+        const imageTrack = document.querySelector("#image-track");
+        if (imageTrack) {
+          const images = imageTrack.querySelectorAll(".gallery-image");
+          if (images.length > 1) {
+            const trackWidth = images.length * window.innerWidth;
 
-          gsap.to(imageTrack, {
-            x: -(trackWidth - window.innerWidth),
-            ease: "none",
-            scrollTrigger: {
-              trigger: "#gallery-section",
-              start: "top top",
-              end: `+=${window.innerHeight * (images.length - 1 + 1)}`,
-              pin: true,
-              scrub: 1,
-              invalidateOnRefresh: true,
-            },
-          });
+            gsap.to(imageTrack, {
+              x: -(trackWidth - window.innerWidth),
+              ease: "none",
+              scrollTrigger: {
+                trigger: "#gallery-section",
+                start: "top top",
+                end: `+=${window.innerHeight * (images.length - 1 + 1)}`,
+                pin: true,
+                scrub: 1,
+                invalidateOnRefresh: true,
+              },
+            });
+          }
         }
-      }
+      });
 
       // Section animations (Tech -> Description -> Features -> Role)
       ScrollTrigger.create({
@@ -239,14 +241,14 @@ export default function ProjectDetail({ project }: { project: any }) {
     <div className="h-auto bg-gradient-to-b from-stone-900 via-stone-800 to-stone-900">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-stone-900/80 backdrop-blur-md border-b border-stone-700">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link
             href="/"
             className="text-white hover:text-stone-300 transition-colors flex items-center gap-2"
           >
             <ArrowLeft className="w-3 h-3" /> Back
           </Link>
-          <h1 className="text-xl font-bold text-white uppercase">
+          <h1 className="text-md sm:text-xl font-bold text-white uppercase ml-4 sm:ml-0">
             {currentData.title}
           </h1>
           <div className="w-24" />
@@ -254,12 +256,18 @@ export default function ProjectDetail({ project }: { project: any }) {
       </header>
 
       {/* Sections Container */}
-      <div id="sections-container" className="h-[280vh] relative pt-[20vh]">
-        <div id="sections-content" className="max-w-7xl mx-auto px-6 pb-10">
+      <div
+        id="sections-container"
+        className="h-[280vh] relative pt-24 md:pt-[20vh]"
+      >
+        <div
+          id="sections-content"
+          className="max-w-7xl mx-auto px-4 sm:px-6 pb-10"
+        >
           {/* Platform Toggle */}
           {project.mobile && (
-            <div className="flex justify-center mb-12 relative z-[100]">
-              <div className="bg-stone-800 p-1 rounded-full border border-stone-700 flex items-center shadow-xl relative min-w-[240px]">
+            <div className="flex justify-center mb-8 md:mb-12 relative z-[100]">
+              <div className="bg-stone-800 p-1 rounded-full border border-stone-700 flex items-center shadow-xl relative min-w-[200px] sm:min-w-[240px]">
                 {/* Animated Background Chip */}
                 <div
                   ref={chipRef}
@@ -277,7 +285,7 @@ export default function ProjectDetail({ project }: { project: any }) {
 
                 <button
                   onClick={() => handlePlatformChange("web")}
-                  className={`relative z-10 flex-1 px-6 py-2 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-300 ${
+                  className={`relative z-10 flex-1 px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold cursor-pointer transition-colors duration-300 ${
                     platform === "web"
                       ? "text-white"
                       : "text-stone-400 hover:text-stone-200"
@@ -287,7 +295,7 @@ export default function ProjectDetail({ project }: { project: any }) {
                 </button>
                 <button
                   onClick={() => handlePlatformChange("mobile")}
-                  className={`relative z-10 flex-1 px-3 py-3 rounded-full text-sm font-semibold cursor-pointer transition-colors duration-300 ${
+                  className={`relative z-10 flex-1 px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold cursor-pointer transition-colors duration-300 ${
                     platform === "mobile"
                       ? "text-white"
                       : "text-stone-400 hover:text-stone-200"
@@ -301,62 +309,30 @@ export default function ProjectDetail({ project }: { project: any }) {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Side - Section Titles */}
-            <div className="space-y-4">
-              <div
-                onClick={() => scrollToSection(0)}
-                className="flex items-center gap-4 p-4 cursor-pointer hover:opacity-80 transition-opacity"
-              >
-                <span className="text-stone-500 font-mono text-sm">01</span>
-                <h3
-                  className={`text-2xl md:text-3xl font-bold transition-colors ${
-                    activeSection === 0 ? "text-blue-500" : "text-white"
-                  }`}
+            <div className="space-y-2 md:space-y-4">
+              {[
+                { num: "01", title: "Tech & Technique" },
+                { num: "02", title: "Description" },
+                { num: "03", title: "Key Features" },
+                { num: "04", title: "My Role" },
+              ].map((section, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => scrollToSection(idx)}
+                  className="flex items-center gap-3 md:gap-4 p-2 md:p-4 cursor-pointer hover:opacity-80 transition-opacity"
                 >
-                  Tech & Technique
-                </h3>
-              </div>
-
-              <div
-                onClick={() => scrollToSection(1)}
-                className="flex items-center gap-4 p-4 cursor-pointer hover:opacity-80 transition-opacity"
-              >
-                <span className="text-stone-500 font-mono text-sm">02</span>
-                <h3
-                  className={`text-2xl md:text-3xl font-bold transition-colors ${
-                    activeSection === 1 ? "text-blue-500" : "text-white"
-                  }`}
-                >
-                  Description
-                </h3>
-              </div>
-
-              <div
-                onClick={() => scrollToSection(2)}
-                className="flex items-center gap-4 p-4 cursor-pointer hover:opacity-80 transition-opacity"
-              >
-                <span className="text-stone-500 font-mono text-sm">03</span>
-                <h3
-                  className={`text-2xl md:text-3xl font-bold transition-colors ${
-                    activeSection === 2 ? "text-blue-500" : "text-white"
-                  }`}
-                >
-                  Key Features
-                </h3>
-              </div>
-
-              <div
-                onClick={() => scrollToSection(3)}
-                className="flex items-center gap-4 p-4 cursor-pointer hover:opacity-80 transition-opacity"
-              >
-                <span className="text-stone-500 font-mono text-sm">04</span>
-                <h3
-                  className={`text-2xl md:text-3xl font-bold transition-colors ${
-                    activeSection === 3 ? "text-blue-500" : "text-white"
-                  }`}
-                >
-                  My Role
-                </h3>
-              </div>
+                  <span className="text-stone-500 font-mono text-xs md:text-sm">
+                    {section.num}
+                  </span>
+                  <h3
+                    className={`text-lg sm:text-xl md:text-3xl font-bold transition-colors ${
+                      activeSection === idx ? "text-blue-500" : "text-white"
+                    }`}
+                  >
+                    {section.title}
+                  </h3>
+                </div>
+              ))}
             </div>
 
             {/* Right Side - Section Content */}
@@ -503,24 +479,24 @@ export default function ProjectDetail({ project }: { project: any }) {
         </div>
       </div>
 
-      {/* Image Gallery Section */}
+      {/* Desktop Image Gallery Section - Hidden on mobile */}
       <div
         id="gallery-section"
-        className="bg-stone-800 border-t border-stone-700 h-screen overflow-hidden"
+        className="hidden md:block bg-stone-800 border-t border-stone-700 h-screen overflow-hidden"
       >
         <div className="h-full flex items-center">
           <div id="image-track" className="flex h-full">
             {(currentData.images || [1]).map((num: number) => (
               <div
                 key={`${platform}-${num}`}
-                className="gallery-image w-screen h-full flex-shrink-0 flex items-center justify-center px-12"
+                className="gallery-image w-screen h-full flex-shrink-0 flex items-center justify-center px-4 sm:px-12"
               >
                 {platform === "mobile" ? (
                   /* Portrait phone frame for mobile screenshots */
                   <div
                     className="relative flex-shrink-0"
                     style={{
-                      height: "78vh",
+                      height: "65vh",
                       aspectRatio: "9 / 19",
                     }}
                   >
@@ -556,6 +532,45 @@ export default function ProjectDetail({ project }: { project: any }) {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Mobile Image Gallery Section - Only on mobile */}
+      <div className="md:hidden bg-stone-800 border-t border-stone-700 py-16 px-4">
+        <h3 className="text-xl font-bold text-white mb-8 text-center uppercase tracking-wider">
+          Project Gallery
+        </h3>
+        <div className="space-y-12">
+          {(currentData.images || [1]).map((num: number) => (
+            <div key={`mobile-${platform}-${num}`} className="w-full">
+              {platform === "mobile" ? (
+                /* Mobile App Screenshot */
+                <div
+                  className="relative mx-auto"
+                  style={{ width: "80%", aspectRatio: "9 / 19" }}
+                >
+                  <div className="absolute inset-0 rounded-[1.5rem] border-4 border-stone-600 bg-black shadow-xl overflow-hidden">
+                    <Image
+                      src={`/projects/${currentSlug}/${num}.png`}
+                      alt={`${currentData.title} screenshot ${num}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              ) : (
+                /* Web App Screenshot */
+                <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl border border-stone-700">
+                  <Image
+                    src={`/projects/${currentSlug}/${num}.png`}
+                    alt={`${currentData.title} screenshot ${num}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
