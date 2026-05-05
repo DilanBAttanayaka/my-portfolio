@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
-import TechBadges from "./TechBadges";
 import ArrowDown from "./ArrowDown";
 import { useSmoothScroll } from "./SmoothScroll";
 
@@ -16,10 +15,12 @@ export default function ProjectDetail({ project }: { project: any }) {
   const lenis = useSmoothScroll();
   const [activeSection, setActiveSection] = useState(0);
   const [platform, setPlatform] = useState<"web" | "mobile">("web");
-  const [expandedFeatures, setExpandedFeatures] = useState<Set<number>>(
-    new Set(),
-  );
+  const [expandedFeature, setExpandedFeature] = useState<number | null>(0);
   const chipRef = useRef<HTMLDivElement>(null);
+
+  const toggleFeature = (index: number) => {
+    setExpandedFeature((prev) => (prev === index ? null : index));
+  };
 
   const handlePlatformChange = (newPlatform: "web" | "mobile") => {
     if (newPlatform === platform) return;
@@ -62,17 +63,6 @@ export default function ProjectDetail({ project }: { project: any }) {
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
-  };
-
-  const toggleFeature = (index: number) => {
-    const newExpanded = new Set(expandedFeatures);
-    if (newExpanded.has(index)) {
-      newExpanded.delete(index);
-    } else {
-      newExpanded.clear();
-      newExpanded.add(index);
-    }
-    setExpandedFeatures(newExpanded);
   };
 
   // Separate effect for platform changes — just resets section states without rebuilding GSAP
@@ -370,83 +360,138 @@ export default function ProjectDetail({ project }: { project: any }) {
             </div>
 
             {/* Right Side - Section Content */}
-            <div className="relative">
-              <div className="backdrop-blur-sm rounded-2xl p-6">
-                <div
-                  id="tech-content"
-                  className="text-stone-300 text-lg leading-relaxed whitespace-pre-line overflow-hidden absolute top-0 left-0 w-full p-6"
-                >
-                  <TechBadges techs={currentData.techs || defaultTechs} />
+            <div className="relative min-h-[420px]">
+              {/* ── 01 Tech & Technique ── */}
+              <div
+                id="tech-content"
+                className="overflow-hidden absolute top-0 left-0 w-full"
+              >
+                <p className="text-xs font-semibold uppercase tracking-widest text-blue-400/70 mb-4">
+                  Stack Used
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {(currentData.techs || defaultTechs).map(
+                    (tech: { name: string; icon: string }, i: number) => (
+                      <div
+                        key={i}
+                        className="group flex items-center gap-3 bg-stone-800/60 hover:bg-stone-800 border border-stone-700/50 hover:border-blue-500/40 rounded-xl px-4 py-3 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10"
+                      >
+                        <div className="relative w-7 h-7 flex-shrink-0">
+                          <Image
+                            src={tech.icon}
+                            alt={tech.name}
+                            fill
+                            className="object-contain group-hover:scale-110 transition-transform duration-300"
+                          />
+                        </div>
+                        <span className="text-sm font-medium text-stone-300 group-hover:text-white transition-colors leading-tight">
+                          {tech.name}
+                        </span>
+                      </div>
+                    ),
+                  )}
                 </div>
+              </div>
 
-                <div
-                  id="description-content"
-                  className="text-stone-300 text-lg leading-relaxed whitespace-pre-line overflow-hidden absolute top-0 left-0 w-full p-6"
-                >
-                  <div className="bg-stone-700/30 p-4 rounded-lg flex items-start gap-2 flex-1 min-w-0">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-3 flex-shrink-0"></div>
+              {/* ── 02 Description ── */}
+              <div
+                id="description-content"
+                className="overflow-hidden absolute top-0 left-0 w-full"
+              >
+                <p className="text-xs font-semibold uppercase tracking-widest text-blue-400/70 mb-4">
+                  Project Overview
+                </p>
+                <div className="relative pl-5 border-l-2 border-blue-500/60">
+                  <p className="text-stone-200 text-lg md:text-xl leading-relaxed font-light">
                     {currentData.description}
-                  </div>
+                  </p>
                 </div>
+              </div>
 
-                <div
-                  id="features-content"
-                  className="text-stone-300 text-lg leading-relaxed overflow-hidden absolute top-0 left-0 w-full p-6 z-10"
-                >
-                  <div className="grid grid-cols-1 gap-3">
-                    {currentData.features?.map(
-                      (
-                        feature: { title: string; description: string },
-                        index: number,
-                      ) => {
-                        const isExpanded = expandedFeatures.has(index);
-                        return (
+              {/* ── 03 Key Features ── */}
+              <div
+                id="features-content"
+                className="overflow-hidden absolute top-0 left-0 w-full z-10"
+              >
+                <p className="text-xs font-semibold uppercase tracking-widest text-blue-400/70 mb-4">
+                  Highlights
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {currentData.features?.map(
+                    (
+                      feature: { title: string; description: string },
+                      index: number,
+                    ) => {
+                      const isOpen = expandedFeature === index;
+                      return (
+                        <div
+                          key={index}
+                          className={`border rounded-xl transition-all duration-300 ${
+                            isOpen
+                              ? "bg-stone-800/80 border-blue-500/40 shadow-md shadow-blue-500/10"
+                              : "bg-stone-800/40 border-stone-700/40 hover:border-stone-600/60"
+                          }`}
+                        >
+                          <button
+                            onClick={() => toggleFeature(index)}
+                            className="w-full flex items-center gap-3 p-3 text-left group"
+                          >
+                            <span
+                              className={`flex-shrink-0 w-8 h-8 rounded-lg border flex items-center justify-center text-xs font-bold font-mono transition-colors ${
+                                isOpen
+                                  ? "bg-blue-500/20 border-blue-500/50 text-blue-400"
+                                  : "bg-stone-700/50 border-stone-600/50 text-stone-400 group-hover:text-blue-400 group-hover:border-blue-500/30"
+                              }`}
+                            >
+                              {String(index + 1).padStart(2, "0")}
+                            </span>
+                            <h4
+                              className={`flex-1 text-sm font-semibold transition-colors ${
+                                isOpen
+                                  ? "text-blue-300"
+                                  : "text-white group-hover:text-stone-200"
+                              }`}
+                            >
+                              {feature.title}
+                            </h4>
+                            {isOpen ? (
+                              <ChevronUp className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                            ) : (
+                              <ChevronDown className="w-4 h-4 text-stone-500 group-hover:text-stone-400 flex-shrink-0 transition-colors" />
+                            )}
+                          </button>
                           <div
-                            key={index}
-                            className={`bg-gradient-to-br from-stone-700/40 to-stone-600/20 rounded-xl border border-stone-600/30 hover:border-stone-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-stone-500/10 ${
-                              isExpanded ? "ring-2 ring-blue-400/50" : ""
+                            className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                              isOpen ? "max-h-48 pb-3" : "max-h-0"
                             }`}
                           >
-                            <button
-                              onClick={() => toggleFeature(index)}
-                              className="w-full p-4 text-left flex items-center justify-between group hover:bg-stone-600/20 transition-colors"
-                            >
-                              <div className="flex items-start gap-2 flex-1 min-w-0">
-                                <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                                <h4 className="text-lg font-semibold text-white leading-tight group-hover:text-blue-300 transition-colors break-words">
-                                  {feature.title}
-                                </h4>
-                              </div>
-                              <div className="ml-4 flex-shrink-0">
-                                {isExpanded ? (
-                                  <ChevronUp className="w-5 h-5 text-stone-400 group-hover:text-blue-300 transition-colors" />
-                                ) : (
-                                  <ChevronDown className="w-5 h-5 text-stone-400 group-hover:text-blue-300 transition-colors" />
-                                )}
-                              </div>
-                            </button>
-                            {isExpanded && (
-                              <div className="px-4 pb-4">
-                                <p className="text-stone-300 leading-relaxed ml-4 text-sm animate-in slide-in-from-top-2 duration-300">
-                                  {feature.description}
-                                </p>
-                              </div>
-                            )}
+                            <p className="text-stone-400 text-sm leading-relaxed px-3 pl-14">
+                              {feature.description}
+                            </p>
                           </div>
-                        );
-                      },
-                    )}
-                  </div>
+                        </div>
+                      );
+                    },
+                  )}
                 </div>
+              </div>
 
-                <div
-                  id="role-content"
-                  className="text-stone-300 text-lg leading-relaxed whitespace-pre-line overflow-hidden absolute top-0 left-0 w-full p-6"
-                >
-                  <div className="bg-stone-700/30 p-4 rounded-lg flex items-start gap-2 flex-1 min-w-0">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-3 flex-shrink-0"></div>
+              {/* ── 04 My Role ── */}
+              <div
+                id="role-content"
+                className="overflow-hidden absolute top-0 left-0 w-full"
+              >
+                <p className="text-xs font-semibold uppercase tracking-widest text-blue-400/70 mb-4">
+                  My Contribution
+                </p>
+                <div className="relative bg-gradient-to-br from-stone-800/80 to-stone-900/60 border border-stone-700/50 rounded-2xl p-6 overflow-hidden">
+                  {/* Decorative quote mark */}
+                  <span className="absolute -top-4 -left-2 text-[8rem] leading-none font-serif text-blue-500/10 select-none pointer-events-none">
+                    &ldquo;
+                  </span>
+                  <p className="relative text-stone-300 text-base leading-relaxed">
                     {currentData.role}
-                  </div>
+                  </p>
                 </div>
               </div>
             </div>
