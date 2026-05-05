@@ -8,10 +8,12 @@ import Image from "next/image";
 import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
 import TechBadges from "./TechBadges";
 import ArrowDown from "./ArrowDown";
+import { useSmoothScroll } from "./SmoothScroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectDetail({ project }: { project: any }) {
+  const lenis = useSmoothScroll();
   const [activeSection, setActiveSection] = useState(0);
   const [platform, setPlatform] = useState<"web" | "mobile">("web");
   const [expandedFeatures, setExpandedFeatures] = useState<Set<number>>(
@@ -48,7 +50,7 @@ export default function ProjectDetail({ project }: { project: any }) {
 
   const scrollToSection = (index: any) => {
     const container = document.getElementById("sections-container");
-    if (!container) return;
+    if (!container || !lenis) return;
 
     const containerTop = container.offsetTop;
     const containerHeight = container.offsetHeight;
@@ -56,9 +58,9 @@ export default function ProjectDetail({ project }: { project: any }) {
     const targetScroll =
       containerTop + containerHeight * scrollPositions[index];
 
-    window.scrollTo({
-      top: targetScroll,
-      behavior: "smooth",
+    lenis.scrollTo(targetScroll, {
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
   };
 

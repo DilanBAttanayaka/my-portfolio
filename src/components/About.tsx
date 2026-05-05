@@ -22,7 +22,7 @@ export default function About() {
         { src: "/svgs/redux.svg", name: "Redux" },
       ],
       detailedDescription:
-        "Building modern, performant web applications using React and Next.js. Expert in TypeScript for type-safe code, state management with Redux, and creating reusable component libraries. Focused on clean code architecture and best practices.",
+        "Building modern, performant web applications using React and Next.js. Expert in TypeScript for type-safe code, state management with Redux and Zustand, and creating reusable component libraries. Focused on clean code architecture and best practices.",
     },
     {
       icon: Palette,
