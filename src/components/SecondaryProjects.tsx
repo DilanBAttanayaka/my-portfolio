@@ -118,7 +118,7 @@ export default function SecondaryProjects() {
                 }}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
               >
-                <div className="relative w-full aspect-[16/9] mt-4 shadow-lg">
+                <div className="relative w-full aspect-[2/1] mt-4 shadow-lg">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -207,7 +207,7 @@ export default function SecondaryProjects() {
                 }}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
               >
-                <div className="relative w-full aspect-[16/9] mt-4 shadow-lg">
+                <div className="relative w-full aspect-[2/1] mt-4 shadow-lg">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -247,7 +247,7 @@ export default function SecondaryProjects() {
                 }}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
               >
-                <div className="relative w-full aspect-[16/9] mt-4 shadow-lg">
+                <div className="relative w-full aspect-[2/1] mt-4 shadow-lg">
                   <Image
                     src={project.image}
                     alt={project.title}

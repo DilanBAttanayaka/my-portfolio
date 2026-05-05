@@ -37,7 +37,7 @@ const projectsData = {
           "Enhanced frontend with meta tags, structured data, Open Graph, and Twitter Cards for better search engine visibility",
       },
     ],
-    role: `Led frontend development for a premium coffee e-commerce platform using Next.js 14, React 18, and TypeScript. Built responsive UI components with Ant Design and Tailwind CSS, implemented Redux Toolkit for state management, and integrated PayHere payment processing. Delivered optimized user experiences across all devices with intuitive shopping flows and form validation.`,
+    role: `Architected and implemented the frontend for this premium coffee e-commerce platform using Next.js 14, React 18, and TypeScript. Built the complete UI component library with Ant Design and Tailwind CSS, implemented Redux Toolkit for state management, and integrated PayHere payment processing. Delivered the entire end-to-end user experience with intuitive shopping flows and secure checkout.`,
     images: [1, 2, 3, 4],
   },
   "hospital-management": {
@@ -110,7 +110,7 @@ const projectsData = {
           "Responsive design with dark mode, SEO optimization, type-safe database queries, automated migrations, cookie consent management, and email notifications with Resend",
       },
     ],
-    role: `Front End Developer for a comprehensive cafe discovery platform using Next.js 14, TypeScript, and Supabase. Integrated Supabase API calls for authentication, data fetching, and real-time updates. Implemented Google Maps API integration for location services and interactive mapping features. Built responsive UI components with Radix UI, React Hook Form for form handling, and Zod for schema validation. Delivered optimized user experiences with modern frontend architecture and performance optimization.`,
+    role: `Developed the complete frontend for this comprehensive cafe discovery platform using Next.js 14, TypeScript, and Supabase. Managed the end-to-end implementation including authentication, real-time data fetching, and Google Maps API integration. Built the entire UI component library with Radix UI and handled all form validation and performance optimization independently.`,
     images: [1, 2, 3, 4],
   },
   twostapp: {
@@ -184,7 +184,7 @@ const projectsData = {
           "Built a comprehensive dashboard for hosts using Recharts for analytics, property listing management, and earning tracking with a modern, high-performance user interface",
       },
     ],
-    role: `Lead Frontend Developer for a premium short-term rental platform using Next.js 15, React 19, and TypeScript. Architected the core application structure with SST (Serverless Stack) and integrated AWS Amplify for secure authentication and cloud services. Developed high-performance UI components using Tailwind CSS 4 and Framer Motion for smooth transitions. Implemented interactive mapping features with Google Maps API and complex state management using Zustand, delivering a polished, high-performance user experience for both hosts and guests.`,
+    role: `Architected and developed the entire frontend for this premium short-term rental platform using Next.js 15, React 19, and TypeScript. Managed the core application structure with SST (Serverless Stack) and built the complete UI using Tailwind CSS 4 and Framer Motion. Implemented all interactive mapping features and complex state management using Zustand to deliver a high-performance user experience.`,
     images: [1, 2, 3, 4],
     mobile: {
       title: "MiiRoom Mobile App",
@@ -219,7 +219,7 @@ const projectsData = {
             "Allow hosts to capture and upload property photos directly from their camera and update pricing on the fly.",
         },
       ],
-      role: `Lead Developer for MiiRoom Mobile App. Built the cross-platform application using React Native and Expo. Implemented real-time messaging using AWS AppSync and Push Notifications with Pinpoint. Focused on creating a high-fidelity mobile experience with smooth gesture-driven interactions and offline-first data persistence.`,
+      role: `Independently developed the MiiRoom Mobile App using React Native and Expo. Built the entire cross-platform application including real-time messaging using AWS AppSync and Push Notifications. Focused on delivering a high-fidelity mobile experience with offline-first data persistence and smooth interactions.`,
       images: [1, 2, 3, 4],
     },
   },
