@@ -3,10 +3,15 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import { useSmoothScroll } from "./SmoothScroll";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const lenis = useSmoothScroll();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,12 +22,46 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const pathname = usePathname();
+
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/#home" },
+    { name: "About", href: "/#about" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Contact", href: "/#contact" },
   ];
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    const isHash = href.startsWith("#") || href.startsWith("/#");
+    if (!isHash) return;
+
+    const targetId = href.replace("/", ""); // Get #id
+
+    // If we are on the home page, smooth scroll
+    if (pathname === "/") {
+      e.preventDefault();
+      if (lenis) {
+        lenis.scrollTo(targetId, {
+          duration: 1.5,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+      } else {
+        const element = document.querySelector(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+      setIsMenuOpen(false);
+    } else {
+      // If we are on another page, let the default Link behavior handle it
+      // or manually navigate if needed.
+      // By default, Link will navigate to /#id which works.
+      setIsMenuOpen(false);
+    }
+  };
 
   return (
     <header
@@ -38,27 +77,34 @@ export default function Header() {
         }`}
       >
         <div className="flex justify-between items-center">
-          <Image
-            src="/logo.png"
-            alt="Logo"
-            width={64}
-            height={32}
-            className={`transition-opacity duration-300 ${
-              isScrolled ? "opacity-0" : "opacity-100"
-            }`}
-          />
+          <Link
+            href="/#home"
+            onClick={(e) => handleNavClick(e, "/#home")}
+            className="cursor-pointer"
+          >
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={64}
+              height={32}
+              className={`transition-opacity duration-300 ${
+                isScrolled ? "opacity-0" : "opacity-100"
+              }`}
+            />
+          </Link>
 
           {/* Desktop Navigation - Hidden when scrolled */}
           {!isScrolled && (
             <div className="hidden md:flex space-x-8">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className="text-stone-300 hover:text-white transition-all duration-300 ease-in-out hover:scale-105"
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
           )}
@@ -104,7 +150,7 @@ export default function Header() {
             }`}
           >
             {navItems.map((item, index) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
                 style={{
@@ -119,10 +165,10 @@ export default function Header() {
                     ? "translate-y-0 opacity-100"
                     : "-translate-y-2 opacity-0"
                 }`}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, item.href)}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
