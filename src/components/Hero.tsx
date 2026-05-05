@@ -225,7 +225,10 @@ export default function Hero() {
       <div className="container mx-auto px-4 w-full">
         <div className="grid items-center gap-10 md:gap-12 md:grid-cols-2">
           {/* Left: Text content */}
-          <div ref={contentRef} className="text-center md:text-left z-10">
+          <div
+            ref={contentRef}
+            className="text-center md:text-left z-10 mt-24 sm:mt-0"
+          >
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-blue-400/80 mb-4">
               Hello, I&apos;m Dilan
             </h1>
