@@ -14,7 +14,7 @@ const secondaryProjects = [
     description:
       "AI-powered legal assistant providing intelligent guidance on legal matters and documentation",
     image: "/ailegal.png",
-    tags: ["Next.js 14", "Typescript", "Tailwind CSS"],
+    tags: ["Next.js 14", "Typescript", "Tailwind CSS", "AWS Amplify"],
     hasImage: true,
   },
   {
@@ -29,11 +29,12 @@ const secondaryProjects = [
   {
     id: 3,
     title: "Rocell Stock App",
+
     description:
       "Mobile app for inventory stock check (integrated with zebra device scanners) for rocell bathware",
     image: "",
     svg: "/svgs/rocell.svg",
-    tags: ["React Native", "TypeScript"],
+    tags: ["React Native", "Expo", "TypeScript"],
     hasImage: false,
   },
   {
@@ -47,12 +48,14 @@ const secondaryProjects = [
   },
   {
     id: 5,
-    title: "Wellness Sri Lanka",
+    title: "Ceylon Sanctuary",
+    status: "Under Development",
+    url: "https://ceylon-sanctuary.vercel.app/",
     description:
       "Premium wellness retreat marketplace connecting seekers with authentic Ayurveda and luxury meditation escapes",
     image: "/projects/wellness/1.png",
     svg: "/svgs/wellness.png",
-    tags: ["Next.js 15", "Supabase", "Tailwind CSS"],
+    tags: ["Next.js 16", "TypeScript", "Supabase", "Tailwind CSS"],
     hasImage: true,
   },
 ];
@@ -171,10 +174,10 @@ export default function SecondaryProjects() {
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-1">
-                      {project.tags.slice(0, 3).map((tag) => (
+                      {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-0.5 bg-stone-100 text-stone-600 rounded-full text-[9px] border border-stone-200"
+                          className="px-2 py-1 bg-stone-200 text-stone-700 rounded-full text-xs"
                         >
                           {tag}
                         </span>
@@ -256,12 +259,48 @@ export default function SecondaryProjects() {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="font-bold text-stone-900 text-xl mb-2">
-                    {project.title}
-                  </h3>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-bold text-stone-900 text-xl">
+                      {project.title}
+                    </h3>
+                    {(project as any).url && (
+                      <a
+                        href={(project as any).url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-stone-500 hover:text-stone-900 transition-colors"
+                        title="Visit Site"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-stone-600 hover:text-stone-900 transition-colors cursor-pointer">
+                            Visit Site
+                          </span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                          </svg>
+                        </div>
+                      </a>
+                    )}
+                  </div>
+                  <p className="text-stone-600 mb-2 text-xs leading-relaxed">
+                    -{project.status}
+                  </p>
                   <p className="text-stone-600 mb-3 text-sm leading-relaxed">
                     {project.description}
                   </p>
+
                   <div className="flex flex-wrap gap-1">
                     {project.tags.map((tag) => (
                       <span

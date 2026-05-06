@@ -1,0 +1,112 @@
+DILAN B ATTANAYAKA
+Frontend Developer
+Matale, Sri Lanka | +94 76 613 8729 | dilanattanayakaya@gmail.com
+LinkedIn: https://www.linkedin.com/in/dilan-attanayake-015343175
+GitHub: https://github.com/DilanBAttanayaka
+
+--------------------------------------------------------------------------------
+PROFESSIONAL SUMMARY
+--------------------------------------------------------------------------------
+Passionate Frontend Developer with over 3 years of experience specializing in React and Next.js. Expert in building fast, responsive, and accessible web applications with a focus on clean code and thoughtful design. Proven track record of taking full ownership of frontend development from the ground up, delivering high-quality production projects, and collaborating effectively in full-stack environments. Founding member at PhraseCode, leading frontend architecture for multiple enterprise-scale platforms.
+
+--------------------------------------------------------------------------------
+WORK EXPERIENCE
+--------------------------------------------------------------------------------
+Frontend Developer | PhraseCode (PVT) Ltd.
+April 2023 – Present
+
+- Early founding member contributing significantly to company growth through technical leadership in frontend development.
+- Took full ownership of frontend architecture and implementation for multiple production projects from the ground up.
+- Developed and maintained high-performance, responsive web applications using Next.js and React.js.
+- Collaborated closely with backend engineering teams to deliver scalable, end-to-end solutions.
+- Optimized frontend performance and real-time features using REST APIs and WebSockets.
+- Gained hands-on experience in developing cross-platform mobile applications using React Native.
+
+--------------------------------------------------------------------------------
+TECHNICAL SKILLS
+--------------------------------------------------------------------------------
+- Core Technologies: JavaScript (ES6+), TypeScript, HTML5, CSS3 (Flexbox, Grid)
+- Frameworks & Libraries: React.js (18/19), Next.js (14/15, App Router, SSR, SSG), React Native, Expo
+- State Management: Redux Toolkit, Zustand
+- UI & Styling: Tailwind CSS (3/4), Radix UI, Material UI (MUI), Ant Design, CSS Modules
+- Animations & Interactivity: GSAP, Framer Motion
+- Tools & Cloud: AWS Amplify, Cognito, AppSync, Supabase, SST (Serverless Stack)
+- Others: REST APIs, WebSockets, Google Maps API, PayHere Integration, TinyMCE, Recharts
+
+--------------------------------------------------------------------------------
+DETAILED PROJECTS
+--------------------------------------------------------------------------------
+
+MiiRoom (Rental Marketplace)
+- Role: Architected and developed the entire frontend using Next.js 15, React 19, and TypeScript. Managed core application structure with SST and implemented complex state management using Zustand.
+- Tech Stack: Next.js 15, React 19, TypeScript, Tailwind CSS 4, AWS Amplify, Framer Motion, Zustand.
+- Key Features: 
+  * Interactive Map Discovery: Integrated Google Maps API with custom markers and location-based filtering.
+  * Secure Auth: Implemented robust authentication using AWS Amplify and Cognito.
+  * Booking Logic: Developed real-time reservation system with complex availability logic.
+  * Host Dashboard: Built analytics dashboard using Recharts for property listing and earning tracking.
+
+MiiRoom Mobile App
+- Role: Independently developed the mobile application using React Native and Expo. Focused on high-fidelity mobile experience with offline-first data persistence.
+- Tech Stack: React Native, Expo, TypeScript, AWS Amplify, Zustand.
+- Key Features: 
+  * Real-time Push Notifications for bookings and messages.
+  * In-App Chat System featuring image sharing and quick-reply templates.
+  * Offline Access to reservation details and check-in instructions.
+
+TwoStapp (Order Management System)
+- Role: Frontend Developer for a food delivery order management system. Created real-time order tracking interface with status animations and optimized performance for large datasets.
+- Tech Stack: Next.js 15, React 19, TypeScript, Tailwind CSS, Radix UI, AWS Amplify.
+- Key Features: 
+  * Real-time Order Management: Complete lifecycle tracking through multiple statuses.
+  * Multi-Platform Integration: Uber Eats (OAuth), DoorDash-ready infrastructure, and Square POS connectivity.
+  * Restaurant Dashboard: Store profile and integration status monitoring.
+
+Bean Empire (Full-stack E-commerce)
+- Role: Architected and implemented the frontend for a premium coffee e-commerce platform. Built the complete UI component library and integrated payment processing.
+- Tech Stack: Next.js 14, React 18, TypeScript, Tailwind CSS, Redux Toolkit, Ant Design, PayHere.
+- Key Features: 
+  * Persistent Shopping Cart using Redux Toolkit and local storage.
+  * Payment Integration: PayHere gateway with secure checkout and validation.
+  * SEO Optimization: Enhanced visibility via structured data, Open Graph, and Twitter Cards.
+
+Hospital Management System
+- Role: Developed an integrated POS system for pharmacy and hospital services and implemented offline capability for critical functions.
+- Tech Stack: Next.js 14, TypeScript, Tailwind CSS, Material UI.
+- Key Features: 
+  * Integrated POS System with real-time inventory and financial tracking.
+  * Offline Capability: Enabling local data storage during connectivity issues.
+  * Resource Management: Unified dashboard for inventory, staff, and financial accounting.
+
+Cafe Finder
+- Role: Developed the complete frontend for a cafe discovery platform. Managed end-to-end implementation including real-time data fetching and Google Maps API integration.
+- Tech Stack: Next.js 14, TypeScript, Tailwind CSS, Radix UI, Supabase.
+- Key Features: 
+  * Interactive Discovery: Location-based search with filters and Google Maps.
+  * Rich Content: Integrated blog system with TinyMCE rich text editing.
+  * User Profiles: Full auth system, review and rating system, and owner dashboard.
+
+AI Legal Assistant
+- Description: AI-powered legal guidance and documentation tool.
+- Tech: Next.js 14, TypeScript, Tailwind CSS.
+
+Wellness Sri Lanka
+- Description: Premium wellness retreat marketplace connecting seekers with Ayurveda and meditation escapes.
+- Tech: Next.js 15, Supabase, Tailwind CSS.
+
+Rocell Stock App (Mobile)
+- Description: Inventory management mobile app integrated with Zebra device scanners for Rocell Bathware.
+- Tech: React Native, TypeScript.
+
+--------------------------------------------------------------------------------
+KEY ACHIEVEMENTS
+--------------------------------------------------------------------------------
+- Successfully delivered 8+ production-ready projects across diverse industries (E-commerce, Healthcare, Fintech, Travel).
+- Established frontend best practices as the first dedicated frontend developer at PhraseCode.
+- Implemented complex animations and interactive UI components using GSAP and Framer Motion.
+- Optimized web performance and SEO for high-traffic platforms, ensuring fast load times and accessibility.
+
+--------------------------------------------------------------------------------
+EDUCATION
+--------------------------------------------------------------------------------
+Details available upon request.
