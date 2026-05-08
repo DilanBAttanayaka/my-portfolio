@@ -12,6 +12,41 @@ export async function sendEmail(formData: FormData) {
   const email = formData.get("email") as string;
   const subject = formData.get("subject") as string;
   const message = formData.get("message") as string;
+  const honeypot = formData.get("confirm_email") as string;
+  const turnstileToken = formData.get("turnstileToken") as string;
+
+  // 1. Honeypot check
+  if (honeypot) {
+    console.log("Honeypot triggered! Bot detected.");
+    return { success: true };
+  }
+
+  // 2. Turnstile Verification
+  if (!turnstileToken) {
+    return { error: "Security check failed. Please try again." };
+  }
+
+  try {
+    const verifyResponse = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `secret=${process.env.TURNSTILE_SECRET_KEY}&response=${turnstileToken}`,
+      }
+    );
+
+    const verifyData = await verifyResponse.json();
+
+    if (!verifyData.success) {
+      return { error: "Security verification failed. Are you a bot?" };
+    }
+  } catch (error) {
+    console.error("Turnstile Error:", error);
+    return { error: "Verification service unavailable." };
+  }
 
   if (!name || !email || !subject || !message) {
     return { error: "All fields are required." };

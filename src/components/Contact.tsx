@@ -15,6 +15,7 @@ import {
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { sendEmail } from "@/app/actions/sendEmail";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,6 +29,7 @@ export default function Contact() {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
 
   const contactInfo = [
     {
@@ -136,10 +138,19 @@ export default function Contact() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!turnstileToken) {
+      setStatus("error");
+      setErrorMessage("Please complete the security check.");
+      return;
+    }
+
     setStatus("loading");
     setErrorMessage("");
 
     const formData = new FormData(e.currentTarget);
+    formData.append("turnstileToken", turnstileToken);
+    
     const result = await sendEmail(formData);
 
     if (result.error) {
@@ -148,6 +159,7 @@ export default function Contact() {
     } else {
       setStatus("success");
       (e.target as HTMLFormElement).reset();
+      setTurnstileToken(""); // Reset token
     }
   }
 
@@ -258,6 +270,17 @@ export default function Contact() {
                   disabled={status === "loading"}
                 />
               </div>
+
+              {/* Honeypot field - hidden from humans but visible to bots */}
+              <div className="hidden" aria-hidden="true">
+                <input
+                  type="text"
+                  name="confirm_email"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div className="mb-6">
                 <label
                   htmlFor="message"
@@ -310,6 +333,16 @@ export default function Contact() {
                   "Send Message"
                 )}
               </button>
+
+              <div className="mt-4 flex justify-center">
+                <Turnstile
+                  siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  options={{
+                    theme: "dark",
+                  }}
+                />
+              </div>
             </form>
           </div>
         </div>
