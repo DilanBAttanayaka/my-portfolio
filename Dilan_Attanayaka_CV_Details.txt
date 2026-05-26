@@ -1,5 +1,5 @@
 DILAN B ATTANAYAKA
-Frontend Developer
+Full-Stack Developer (FE-Focused)
 Matale, Sri Lanka | +94 76 613 8729 | dilanattanayakaya@gmail.com
 LinkedIn: https://www.linkedin.com/in/dilan-attanayake-015343175
 GitHub: https://github.com/DilanBAttanayaka
@@ -7,31 +7,31 @@ GitHub: https://github.com/DilanBAttanayaka
 --------------------------------------------------------------------------------
 PROFESSIONAL SUMMARY
 --------------------------------------------------------------------------------
-Passionate Frontend Developer with over 3 years of experience specializing in React and Next.js. Expert in building fast, responsive, and accessible web applications with a focus on clean code and thoughtful design. Proven track record of taking full ownership of frontend development from the ground up, delivering high-quality production projects, and collaborating effectively in full-stack environments. Founding member at PhraseCode, leading frontend architecture for multiple enterprise-scale platforms.
+Passionate Full-Stack Developer with a strong frontend focus and over 3 years of experience. Expert in React, Next.js, and modern backend architectures using Node.js, Express, PostgreSQL, Prisma, and SQLite. Proven track record of taking full ownership of product development from the ground up, delivering high-performance production projects, and collaborating effectively to build scalable end-to-end solutions. Founding member at PhraseCode, leading application architecture for multiple enterprise-scale platforms.
 
 --------------------------------------------------------------------------------
 WORK EXPERIENCE
 --------------------------------------------------------------------------------
-Frontend Developer | PhraseCode (PVT) Ltd.
+Full-Stack / Frontend Developer | PhraseCode (PVT) Ltd.
 April 2023 – Present
 
-- Early founding member contributing significantly to company growth through technical leadership in frontend development.
-- Took full ownership of frontend architecture and implementation for multiple production projects from the ground up.
-- Developed and maintained high-performance, responsive web applications using Next.js and React.js.
-- Collaborated closely with backend engineering teams to deliver scalable, end-to-end solutions.
-- Optimized frontend performance and real-time features using REST APIs and WebSockets.
+- Early founding member contributing significantly to company growth through technical leadership in building end-to-end features.
+- Took full ownership of architecture and implementation for multiple high-performance production applications.
+- Developed and maintained high-performance, responsive web applications using Next.js, React.js, and Node.js.
+- Architected database queries, API routes, and collaborated closely with cross-functional engineering teams to deliver scalable solutions.
+- Optimized web performance, API integration, and real-time features using WebSockets and REST services.
 - Gained hands-on experience in developing cross-platform mobile applications using React Native.
 
 --------------------------------------------------------------------------------
 TECHNICAL SKILLS
 --------------------------------------------------------------------------------
-- Core Technologies: JavaScript (ES6+), TypeScript, HTML5, CSS3 (Flexbox, Grid)
-- Frameworks & Libraries: React.js (18/19), Next.js (14/15, App Router, SSR, SSG), React Native, Expo
+- Languages & Core: JavaScript (ES6+), TypeScript, HTML5, CSS3 (Flexbox, Grid)
+- Frontend Frameworks: React.js (18/19), Next.js (14/15, App Router, SSR, SSG), React Native, Expo
+- Backend & Databases: Node.js, Express.js, Prisma ORM, PostgreSQL, SQLite
 - State Management: Redux Toolkit, Zustand
-- UI & Styling: Tailwind CSS (3/4), Radix UI, Material UI (MUI), Ant Design, CSS Modules
-- Animations & Interactivity: GSAP, Framer Motion
+- UI, Animations & Styling: Tailwind CSS (3/4), Radix UI, Material UI (MUI), Ant Design, GSAP, Framer Motion
 - Tools & Cloud: AWS Amplify, Cognito, AppSync, Supabase, SST (Serverless Stack)
-- Others: REST APIs, WebSockets, Google Maps API, PayHere Integration, TinyMCE, Recharts
+- Integrations: REST APIs, WebSockets, Google Maps API, PayHere Integration, TinyMCE, Recharts
 
 --------------------------------------------------------------------------------
 DETAILED PROJECTS

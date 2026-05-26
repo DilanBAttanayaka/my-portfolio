@@ -21,13 +21,14 @@ export default function Hero() {
   // Tech icons data with positions from 260° to 40° (bottom arc wrapping through 0°)
   const techIcons = [
     { name: "HTML", angle: 30 - 8, svg: "/svgs/html.svg" },
-    { name: "CSS", angle: 47 - 8, svg: "/svgs/css.svg" },
-    { name: "JavaScript", angle: 64 - 8, svg: "/svgs/javascript.svg" },
-    { name: "TypeScript", angle: 81 - 8, svg: "/svgs/typescript.svg" },
-    { name: "Next.js", angle: 98 - 8, svg: "/svgs/nextjs.svg" },
-    { name: "React", angle: 115 - 8, svg: "/svgs/react.svg" },
-    { name: "Redux", angle: 133 - 8, svg: "/svgs/redux.svg" },
-    { name: "Tailwind", angle: 150 - 8, svg: "/svgs/tailwind.svg" },
+    { name: "JavaScript", angle: 45 - 8, svg: "/svgs/javascript.svg" },
+    { name: "TypeScript", angle: 60 - 8, svg: "/svgs/typescript.svg" },
+    { name: "Next.js", angle: 75 - 8, svg: "/svgs/nextjs.svg" },
+    { name: "React", angle: 90 - 8, svg: "/svgs/react.svg" },
+    { name: "Tailwind", angle: 105 - 8, svg: "/svgs/tailwind.svg" },
+    { name: "Node.js", angle: 120 - 8, svg: "/svgs/nodejs.svg" },
+    { name: "PostgreSQL", angle: 135 - 8, svg: "/svgs/postgresql.svg" },
+    { name: "Prisma", angle: 150 - 8, svg: "/svgs/prisma.svg" },
   ];
 
   const getIconPosition = (angle: number) => {
@@ -233,11 +234,12 @@ export default function Hero() {
               Hello, I&apos;m Dilan
             </h1>
             <h2 className="text-xl md:text-2xl font-semibold text-stone-300 mb-4">
-              Frontend Developer
+              Full-Stack Developer (FE-Focused)
             </h2>
             <p className="text-base md:text-lg text-gray-300 mb-8 max-w-xl mx-auto md:mx-0">
-              With over 3 years of experience, I specialize in creating fast,
-              responsive, and accessible web applications.
+              With over 3 years of experience, I specialize in crafting premium,
+              high-fidelity frontend experiences, backed by capability to build
+              robust backend systems using Node.js and databases.
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
               <a
@@ -331,12 +333,9 @@ export default function Hero() {
                         iconRefs.current[index] = el;
                       }}
                       className={`absolute opacity-80 cursor-pointer ${
-                        [
-                          "TypeScript",
-                          "JavaScript",
-                          "Redux",
-                          "Next.js",
-                        ].includes(tech.name)
+                        ["TypeScript", "JavaScript", "Prisma", "Node.js"].includes(
+                          tech.name,
+                        )
                           ? "w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-9 lg:h-9"
                           : "w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 lg:w-12 lg:h-12"
                       }`}

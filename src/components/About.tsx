@@ -18,8 +18,8 @@ export default function About() {
   const skills = [
     {
       icon: Code,
-      title: "Frontend Development",
-      description: "React, Next.js, TypeScript",
+      title: "Full-Stack Development",
+      description: "Next.js, Node, Express, Prisma",
       techIcons: [
         {
           src: "/svgs/nextjs.svg",
@@ -34,26 +34,26 @@ export default function About() {
             "Proficient in building reusable components, custom hooks, and managing complex application logic with React 18/19.",
         },
         {
-          src: "/svgs/typescript.svg",
-          name: "TypeScript",
+          src: "/svgs/nodejs.svg",
+          name: "Node.js & Express",
           description:
-            "Leveraging static typing and advanced TS features to build maintainable, error-free codebases at scale.",
+            "Building fast, secure, and robust RESTful APIs and middleware architecture with Express.js.",
         },
         {
-          src: "/svgs/zustand.svg",
-          name: "Zustand",
+          src: "/svgs/postgresql.svg",
+          name: "PostgreSQL & SQLite",
           description:
-            "Utilizing bearbones, lightweight state management for efficient and simple global state handling.",
+            "Designing relational databases, normalization, and handling data storage across SQLite and Postgres.",
         },
         {
-          src: "/svgs/redux.svg",
-          name: "Redux",
+          src: "/svgs/prisma.svg",
+          name: "Prisma ORM",
           description:
-            "Managing large-scale application state with Redux Toolkit, Slices, and optimized middleware.",
+            "Using type-safe database schemas, migrations, and relationships to fetch and manipulate database records easily.",
         },
       ],
       detailedDescription:
-        "Building modern, performant web applications using React and Next.js. Expert in TypeScript for type-safe code, state management with Redux and Zustand, and creating reusable component libraries. Focused on clean code architecture and best practices.",
+        "Architecting robust modern web applications end-to-end. Experienced in building responsive user interfaces combined with clean, efficient Node/Express backends, schema design, and seamless database migrations using Prisma.",
     },
     {
       icon: Palette,
@@ -393,9 +393,9 @@ export default function About() {
             About Me
           </h2>
           <p className="text-xl text-stone-300 max-w-3xl mx-auto">
-            I&apos;m a passionate frontend developer with expertise in React and
-            Next.js. I love creating intuitive user experiences and building
-            scalable web applications.
+            I&apos;m a passionate full-stack developer with a strong frontend
+            focus. I build high-fidelity interfaces paired with modern, robust
+            backends.
           </p>
           {/* Bio section */}
           <div
@@ -405,8 +405,9 @@ export default function About() {
             {/* Left — personal paragraph */}
             <div className="relative pl-5 border-l-2 border-blue-500/50">
               <p className="text-stone-300 text-lg leading-relaxed text-left">
-                I&apos;m a frontend developer who loves building things that
-                feel as good as they look. I joined{" "}
+                I&apos;m a full-stack developer with a frontend focus, dedicated
+                to building applications that feel as good as they look. I
+                joined{" "}
                 <span className="text-white font-medium">PhraseCode</span> early
                 as their{" "}
                 <span className="text-white font-medium">
@@ -427,7 +428,7 @@ export default function About() {
                 { value: "3+", label: "Years of Experience" },
                 { value: "8+", label: "Production Projects" },
                 { value: "2023", label: "Joined PhraseCode" },
-                { value: "Full‑stack", label: "Mindset, Frontend Focus" },
+                { value: "Full‑stack", label: "Frontend-Heavy Focus" },
               ].map((stat) => (
                 <div
                   key={stat.label}
@@ -581,7 +582,7 @@ export default function About() {
                 <div className="space-y-4">
                   <div className="flex justify-between items-start flex-wrap gap-2">
                     <h4 className="text-xl font-semibold text-stone-200">
-                      Frontend Developer
+                      Full-Stack / Frontend Developer
                     </h4>
                     <span className="text-stone-400 text-sm">
                       April 2023 – Present
@@ -592,10 +593,10 @@ export default function About() {
                   </p>
                   <ul className="space-y-3 text-stone-300 list-disc list-inside ">
                     <li className="leading-relaxed">
-                      One of the founding members contributing to the
-                      company&apos;s growth by taking leadership of front-end
-                      web development and collaborating closely with the backend
-                      engineering team to deliver scalable, high-quality,
+                      One of the founding members contributing significantly to
+                      company growth by leading development of user interfaces
+                      and web APIs, collaborating closely with engineering teams
+                      to design schemas and deliver scalable, high-quality,
                       end-to-end solutions.
                     </li>
                     <li className="leading-relaxed">

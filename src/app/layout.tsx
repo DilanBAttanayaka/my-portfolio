@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dilan B. Attanayaka | Frontend Developer",
-  description: "Frontend Developer with 3+ years of experience specializing in fast, responsive, and accessible web applications.",
+  title: "Dilan B. Attanayaka | Full-Stack Developer (FE-Focused)",
+  description: "Full-Stack Developer (FE-Focused) with 3+ years of experience specializing in premium Next.js interfaces, backed by solid Node.js and database backend capabilities.",
 };
 
 import SmoothScroll from "@/components/SmoothScroll";
